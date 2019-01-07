@@ -1,0 +1,48 @@
+.guess-display {
+    display: flex;
+    max-width: 330px;
+    min-width: 330px;
+    height: 100vh;
+}
+.guess-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    margin: 1rem auto;
+}
+
+.score-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.guess-input {
+    margin-bottom: 2rem;
+}
+
+input[type="text"] {
+    width: 100%; 
+    box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing: border-box;
+}
+
+.all-countries {
+    overflow-y: scroll;
+    margin-bottom: 2rem;
+}
+
+.list-item {
+    text-align: center;
+    line-height: 1;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-top: 1px solid #fafafa;
+    border-bottom: 1px solid #fafafa;
+}
+
+
+.all-countries {
+    border: 1px solid gray;
+}
