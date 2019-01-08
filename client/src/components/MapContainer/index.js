@@ -1,69 +1,17 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper } from 'google-maps-react';
 
+// import styles array from utils
+import MapAppearance from '../../utils/MapAppearance';
+
+// Country data courtesy of https://github.com/datasets/geo-countries
 
 const mapStyles = {
     width: '100%',
-    height: '100%'
+    height: '100vh'
 };
 
 export class MapContainer extends Component {
-    mapStyles = [
-        {
-            "elementType": "labels",
-            "stylers": [{ "visibility": "off" }]
-        },
-        {
-            "featureType": "administrative.land_parcel",
-            "stylers": [{ "visibility": "off" }]
-        },
-        {
-            "featureType": "administrative.neighborhood",
-            "stylers": [{ "visibility": "off" }]
-        },
-        {
-            "featureType": "administrative.province",
-            "elementType": "geometry.fill",
-            "stylers": [{ "visibility": "off" }]
-        },
-        {
-            "featureType": "administrative.province",
-            "elementType": "geometry.stroke",
-            "stylers": [{ "visibility": "off" }]
-        },
-        {
-            "featureType": "landscape.natural",
-            "elementType": "geometry",
-            "stylers": [{ "visibility": "on" }]
-        },
-        {
-            "featureType": "landscape.natural.landcover",
-            "elementType": "geometry",
-            "stylers": [{ "visibility": "on" }]
-        },
-        {
-            "featureType": "poi",
-            "elementType": "labels.text",
-            "stylers": [{ "visibility": "off" }]
-        },
-        {
-            "featureType": "poi.business",
-            "stylers": [{ "visibility": "off" }]
-        },
-        {
-            "featureType": "road",
-            "stylers": [{ "visibility": "off" }]
-        },
-        {
-            "featureType": "road",
-            "elementType": "labels.icon",
-            "stylers": [{ "visibility": "off" }]
-        },
-        {
-            "featureType": "transit",
-            "stylers": [{ "visibility": "off" }]
-        }
-    ];
 
     render() {
         return (
@@ -81,7 +29,7 @@ export class MapContainer extends Component {
                 rotateControl={false}
                 streetViewControl={false}
                 gestureHandling={'cooperative'}
-                styles={this.mapStyles}
+                styles={MapAppearance}
             />
         );
     }
