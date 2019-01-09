@@ -2,6 +2,18 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const countrySchema = new Schema({
+    type: { type: String },
+    geometry: {
+        type: { type: String },
+        coordinates: {
+            type: [[[Number]]],
+            required: true
+        }
+    },
+    properties: {
+        'ADMIN': { type: String },
+        'ISO_A3': { type: String }
+    }
 
 });
 
