@@ -40,6 +40,7 @@ class App extends Component {
             }}
             onLoad={(map) => {
               console.log('map.data: ', map.data);
+              console.log(process.env.REACT_APP_MAP_KEY);
               map.data.loadGeoJson('/places.geojson');
             }}
             options={googleMapOptions}
