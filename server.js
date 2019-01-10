@@ -13,6 +13,17 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+// Connect to the Mongo DB
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/worldcountries");
+
+//collect the list of countries to guess and place them in alphabetical order
+app.get("/api/countries", (req, res) => {
+  db.Country
+    .find({}, { "properties.ADMIN": 1 }, { sort: { 'properties.ADMIN': 1 } })
+    .then(dbModel => { res.json(dbModel) })
+    .catch(err => res.status(422).json(err));
+})
+
 // Send every request to the React app
 // Define any API routes before this runs
 app.get("*", function (req, res) {

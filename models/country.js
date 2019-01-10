@@ -6,7 +6,7 @@ const countrySchema = new Schema({
     geometry: {
         type: { type: String },
         coordinates: {
-            type: [[[Number]]],
+            type: Array,
             required: true
         }
     },
