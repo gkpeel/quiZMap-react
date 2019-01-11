@@ -9,12 +9,12 @@ class SideBar extends Component {
         return (
             <div className="guess-display">
                 <div className="guess-container">
-                    <h1>Guess a Country</h1>
+                    <h1 className="mb-4 font-concert">Guess a Country</h1>
 
                     <CountryGuess />
 
                     {/* Timer TO-DOs: Trigger SoG/EoG */}
-                    <Timer />
+                    <Timer gameStarted={this.props.gameStarted} />
 
                 </div>
             </div>

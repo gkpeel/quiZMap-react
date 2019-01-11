@@ -2,8 +2,8 @@ import React from "react";
 
 const Country = props => {
     return (
-        <div className="country-display">
-            {props.guessed ? props.country : "????????????"}
+        <div className="country-display" style={{ textAlign: "center" }}>
+            {props.guessed ? props.country : "???????????????"}
         </div>
     )
 }

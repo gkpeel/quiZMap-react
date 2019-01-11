@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 650 650" style="enable-background:new 0 0 650 650;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#34CBEB;}
+	.st1{fill:#009FE5;}
+	.st2{fill:#008942;}
+</style>
+<g>
+	<polygon class="st0" points="550,10 100,10 100,100 10,100 10,550 100,550 100,640 460,640 460,550 550,550 550,640 640,640 
+		640,549 550,549 550,459 640,459 640,100 550,100 	"/>
+</g>
+<polygon class="st1" points="208,99 208,550 359,550 359,458 299,458 299,371 438,371 438,99 "/>
+<polygon class="st2" points="151,10 100,10 100,60 100,100 10,100 10,186 23,186 23,143 191,143 191,59 276,59 276,10 "/>
+<polyline class="st2" points="10,354 10,550 52,550 52,480 94,480 94,438 179,438 179,354 137,354 137,312 94,312 94,270 52,270 
+	52,228 10,228 10,312 "/>
+<rect x="100" y="550" class="st2" width="42" height="42"/>
+<rect x="221" y="598" class="st2" width="42" height="42"/>
+<polyline class="st2" points="466,264 508,264 508,390 466,390 466,480 508,480 508,432 550,432 550,389 591,389 591,305 640,305 
+	640,179 640,100 593,100 550,100 550,10 466,10 466,179 "/>
+</svg>

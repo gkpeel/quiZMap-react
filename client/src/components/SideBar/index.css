@@ -3,6 +3,8 @@
     max-width: 330px;
     min-width: 330px;
     height: 100vh;
+    box-shadow: 3px 0px 20px 3px #666;
+    z-index: 20;
 }
 .guess-container {
     display: flex;

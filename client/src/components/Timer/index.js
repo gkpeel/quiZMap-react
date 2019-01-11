@@ -1,5 +1,11 @@
 import React, { Component } from "react";
 
+const buttonStyling = {
+    flex: "1 0 auto",
+    display: "block",
+    margin: "0.25rem"
+}
+
 class Timer extends Component {
     state = {
         secondsRemaining: 899,
@@ -7,6 +13,12 @@ class Timer extends Component {
         inOn: false
     }
     intervalHandle;
+
+    gameStart = () => {
+        if (this.props.gameStarted) {
+            this.startCountDown();
+        }
+    }
 
     componentDidMount() {
         var min = Math.floor((this.state.secondsRemaining + 1) / 60);
@@ -58,12 +70,17 @@ class Timer extends Component {
         console.log(this.state)
         return (
             <div>
-                <h1>
+                <h1 className="display-3 text-center">
                     {this.state.minutes}:{this.state.seconds}
                 </h1>
-                <button className="btn btn-primary" onClick={this.state.isOn ? this.pauseCountDown : this.startCountDown}>
-                    {this.state.isOn ? 'Pause' : 'Start'}
+                <div className="d-flex">
+                    <button style={buttonStyling} className="btn btn-primary" onClick={this.state.isOn ? this.pauseCountDown : this.startCountDown}>
+                        {this.state.isOn ? 'Pause' : 'Start'}
+                    </button>
+                    <button style={buttonStyling} className="btn btn-danger">
+                        Restart
                 </button>
+                </div>
             </div>
         )
     }

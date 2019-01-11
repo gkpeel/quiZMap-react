@@ -7,7 +7,6 @@ const googleMapOptions = {
     fullscreenControl: false,
     mapTypeControl: false,
     streetViewControl: false,
-    zoomControl: false,
 }
 
 class WorldMap extends Component {

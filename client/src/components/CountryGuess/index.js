@@ -59,7 +59,9 @@ class CountryGuess extends Component {
                         type="text"
                         name="currentGuess"
                         value={this.state.currentGuess}
-                        onChange={this.handleInputChange}>
+                        onChange={this.handleInputChange}
+                        placeholder="Start typing country names here"
+                        disabled>
                     </input>
                 </form>
                 <div className="all-countries">
