@@ -10,22 +10,31 @@ class Timer extends Component {
     state = {
         secondsRemaining: 899,
         seconds: "00",
-        inOn: false
     }
     intervalHandle;
 
     gameStart = () => {
-        if (this.props.gameStarted) {
+        if (this.props.timerRunning) {
             this.startCountDown();
         }
     }
 
-    componentDidMount() {
+    setMins = () => {
         var min = Math.floor((this.state.secondsRemaining + 1) / 60);
 
         this.setState({
             minutes: min
         })
+    }
+
+    componentDidMount() {
+        this.setMins();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (!prevProps.timerRunning && this.props.timerRunning) {
+            this.gameStart();
+        }
     }
 
     tick = () => {
@@ -56,28 +65,38 @@ class Timer extends Component {
     }
 
     startCountDown = () => {
-        console.log('here', this.state);
-        this.setState({ isOn: true });
-        this.intervalHandle = setInterval(this.tick, 1000);
+        if (this.props.timerRunning) {
+            this.intervalHandle = setInterval(this.tick, 1000);
+        }
     }
 
     pauseCountDown = () => {
-        this.setState({ isOn: false });
+        this.props.toggleTimer();
         clearInterval(this.intervalHandle);
     }
 
+    resetCountDown = () => {
+        this.pauseCountDown();
+        this.setState({
+            secondsRemaining: 899,
+            seconds: "00",
+            isOn: false
+        })
+        this.setMins();
+        this.props.toggleGame();
+    }
+
     render() {
-        console.log(this.state)
         return (
             <div>
                 <h1 className="display-3 text-center">
                     {this.state.minutes}:{this.state.seconds}
                 </h1>
                 <div className="d-flex">
-                    <button style={buttonStyling} className="btn btn-primary" onClick={this.state.isOn ? this.pauseCountDown : this.startCountDown}>
-                        {this.state.isOn ? 'Pause' : 'Start'}
+                    <button onClick={this.props.toggleTimer} style={buttonStyling} className="btn btn-primary">
+                        {this.props.timerRunning ? 'Pause' : 'Start'}
                     </button>
-                    <button style={buttonStyling} className="btn btn-danger">
+                    <button onClick={this.resetCountDown} style={buttonStyling} className="btn btn-danger">
                         Restart
                 </button>
                 </div>

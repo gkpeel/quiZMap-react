@@ -51,18 +51,17 @@ class CountryGuess extends Component {
     };
 
     render() {
-        console.log(this.state);
         return (
             <div>
                 <form className="form guess-input" style={{ marginBottom: "2rem" }}>
                     <input
                         type="text"
                         name="currentGuess"
+                        placeholder="Start typing country names here"
                         value={this.state.currentGuess}
                         onChange={this.handleInputChange}
-                        placeholder="Start typing country names here"
-                        disabled>
-                    </input>
+                        disabled={!this.props.timerRunning}
+                    />
                 </form>
                 <div className="all-countries">
                     {this.state.countriesToGuess.map((country, i) =>

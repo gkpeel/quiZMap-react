@@ -11,10 +11,13 @@ class SideBar extends Component {
                 <div className="guess-container">
                     <h1 className="mb-4 font-concert">Guess a Country</h1>
 
-                    <CountryGuess />
+                    <CountryGuess timerRunning={this.props.timerRunning} />
 
                     {/* Timer TO-DOs: Trigger SoG/EoG */}
-                    <Timer gameStarted={this.props.gameStarted} />
+                    <Timer
+                        timerRunning={this.props.timerRunning}
+                        toggleTimer={this.props.toggleTimer}
+                    />
 
                 </div>
             </div>

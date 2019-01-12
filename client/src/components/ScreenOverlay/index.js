@@ -2,37 +2,11 @@ import React, { Component } from "react";
 import logo from "../../img/quizmap-logo.svg";
 import "./index.css";
 
-
 class ScreenOverlay extends Component {
-
-    state = {
-        active: true
-    }
-
-    //on startGame click:
-    // empty countriesGuessed array 
-    // modal/overlay needs to disappear
-    // remove disabled from input
-    // timer needs to start
-
-    //on pauseGame click:
-    // timer needs to pause
-    // apply disabled to input
-    // add blur overlay (aka if )
-
-    // on quitGame click:
-    // timer needs to reset
-    // disable input
-    // add End of Game over
-
-    startGame = () => {
-        this.setState({ active: false });
-        this.props.gameStarted();
-    }
 
     render() {
         return (
-            <div className={this.state.active ? (`loadScreenSyle active`) : (`loadScreenSyle`)}>
+            <div className={this.props.timerRunning ? (`loadScreenStyle`) : (`loadScreenStyle active`)}>
                 <div className="loadCopyContainer">
                     <img
                         src={logo}
@@ -49,7 +23,7 @@ class ScreenOverlay extends Component {
                     <button
                         style={{ backgroundColor: "#599DE2", borderColor: "#599DE2" }}
                         className="mx-auto d-block w-50 btn btn-lg btn-primary"
-                        onClick={this.startGame}
+                        onClick={this.props.toggleTimer}
                     >
                         Start Game
                     </button>

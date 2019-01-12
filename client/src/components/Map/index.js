@@ -11,6 +11,10 @@ const googleMapOptions = {
 
 class WorldMap extends Component {
 
+    state = {
+        quizmap: null
+    }
+
     render() {
         return (
 
@@ -27,10 +31,13 @@ class WorldMap extends Component {
                     lng: -75.1652
                 }}
                 onLoad={(map) => {
+
                     console.log('map.data: ', map.data);
                     map.data.loadGeoJson('/places.geojson');
+                    this.setState({ quizmap: map });
                 }}
                 options={googleMapOptions}
+                yesIWantToUseGoogleMapApiInternals
             >
             </GoogleMap>
         )

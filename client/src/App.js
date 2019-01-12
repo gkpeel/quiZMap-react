@@ -1,31 +1,36 @@
 import React, { Component } from "react";
 import { LoadScript } from 'react-google-maps-api';
 import SideBar from "./components/SideBar";
-import ScreenOverlay from "./components/LoadScreen";
+import ScreenOverlay from "./components/ScreenOverlay";
 import Map from "./components/Map";
 import "./App.css";
 
 class App extends Component {
 
   state = {
-    gameStarted: false,
-    timerRunning: false
+    timerRunning: false,
+    gameOver: false
   }
 
-  gameStart = () => {
-    this.setState({
-      gameStarted: true
-    })
-  }
-
-  startGame = () => {
-    this.setState({ gameStarted: true })
+  toggleTimer = () => {
+    if (this.state.gameStarted === false) {
+      this.setState({ gameStarted: true })
+    }
+    if (this.state.timerRunning === false) {
+      this.setState({ timerRunning: true })
+    } else {
+      this.setState({ timerRunning: false })
+    }
   }
 
   render() {
     return (
       <div className="App">
-        <SideBar gameStarted={this.state.gameStarted} />
+        <SideBar
+          timerRunning={this.state.timerRunning}
+          toggleTimer={this.toggleTimer}
+        />
+
         <LoadScript
           id="script-loader"
           googleMapsApiKey={process.env.REACT_APP_MAP_KEY}
@@ -35,7 +40,6 @@ class App extends Component {
           onLoad={() => console.log("script loaded")}
           loadingElement={<div>Loading...</div>}
         >
-          {/* {this.state.gameStarted ? <Map /> : <ScreenOverlay gameStarted={this.startGame} timerRunning={this.state.timerRunning} />} */}
           <div
             style={{
               position: "relative",
@@ -43,7 +47,10 @@ class App extends Component {
               width: "100%"
             }}
           >
-            <ScreenOverlay gameStarted={this.startGame} timerRunning={this.state.timerRunning} />
+            <ScreenOverlay
+              timerRunning={this.state.timerRunning}
+              toggleTimer={this.toggleTimer}
+            />
             <Map />
           </div>
 
