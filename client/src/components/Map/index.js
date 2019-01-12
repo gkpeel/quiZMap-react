@@ -10,7 +10,7 @@ const googleMapOptions = {
     streetViewControl: false,
 }
 
-class WorldMap extends Component {
+class Map extends Component {
 
     componentDidUpdate() {
         API.loadCountry(this.props.correctGuess, this.state.quizmap);
@@ -45,4 +45,4 @@ class WorldMap extends Component {
 
 }
 
-export default WorldMap;
+export default Map;
