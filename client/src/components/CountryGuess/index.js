@@ -14,6 +14,7 @@ class CountryGuess extends Component {
     checkGuess = () => {
         if (this.state.countriesToGuess.includes(this.state.currentGuess)) {
             console.log('guessed a new country');
+            this.props.correctGuess(this.state.currentGuess);
             this.state.countriesGuessed.push(this.state.currentGuess);
             this.setState({
                 currentGuess: ""
@@ -25,12 +26,12 @@ class CountryGuess extends Component {
     componentDidMount() {
         axios.get("/api/countries")
             .then(response => {
-                console.log(response);
+                // console.log(response);
                 const countryArray = [];
                 response.data.forEach(countryObj => {
                     countryArray.push(countryObj.properties.ADMIN);
                 })
-                console.log(countryArray);
+                // console.log(countryArray);
                 this.setState({
                     countriesToGuess: countryArray
                 });

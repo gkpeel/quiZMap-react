@@ -23,12 +23,17 @@ class App extends Component {
     }
   }
 
+  correctGuess = (correctGuessInput) => {
+    this.setState({ correctGuess: correctGuessInput });
+  }
+
   render() {
     return (
       <div className="App">
         <SideBar
           timerRunning={this.state.timerRunning}
           toggleTimer={this.toggleTimer}
+          correctGuess={this.correctGuess}
         />
 
         <LoadScript
@@ -37,7 +42,7 @@ class App extends Component {
           language={"en"}
           region={"EN"}
           version={"weekly"}
-          onLoad={() => console.log("script loaded")}
+          // onLoad={() => console.log("script loaded")}
           loadingElement={<div>Loading...</div>}
         >
           <div
@@ -51,7 +56,9 @@ class App extends Component {
               timerRunning={this.state.timerRunning}
               toggleTimer={this.toggleTimer}
             />
-            <Map />
+            <Map
+              correctGuess={this.state.correctGuess}
+            />
           </div>
 
         </LoadScript>

@@ -24,6 +24,14 @@ app.get("/api/countries", (req, res) => {
     .catch(err => res.status(422).json(err));
 })
 
+// return the correctGuess GeoJSON object
+app.get("/api/:country", (req, res) => {
+  db.Country
+    .findOne({ "properties.ADMIN": req.params.country })
+    .then(dbModel => { res.json(dbModel) })
+    .catch(err => console.log(err))
+})
+
 // Send every request to the React app
 // Define any API routes before this runs
 app.get("*", function (req, res) {

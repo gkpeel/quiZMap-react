@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { GoogleMap } from "react-google-maps-api";
 import MapAppearance from "../../utils/MapAppearance";
+import API from "../../utils/API.js";
 
 const googleMapOptions = {
     styles: MapAppearance,
@@ -11,8 +12,8 @@ const googleMapOptions = {
 
 class WorldMap extends Component {
 
-    state = {
-        quizmap: null
+    componentDidUpdate() {
+        API.loadCountry(this.props.correctGuess, this.state.quizmap);
     }
 
     render() {
@@ -34,10 +35,9 @@ class WorldMap extends Component {
 
                     console.log('map.data: ', map.data);
                     map.data.loadGeoJson('/places.geojson');
-                    this.setState({ quizmap: map });
+                    // this.setState({ quizmap: map });
                 }}
                 options={googleMapOptions}
-                yesIWantToUseGoogleMapApiInternals
             >
             </GoogleMap>
         )
