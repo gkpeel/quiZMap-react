@@ -12,6 +12,10 @@ const googleMapOptions = {
 
 class Map extends Component {
 
+    state = {
+        quizmap: null
+    }
+
     componentDidUpdate() {
         API.loadCountry(this.props.correctGuess, this.state.quizmap);
     }
@@ -33,9 +37,9 @@ class Map extends Component {
                 }}
                 onLoad={(map) => {
 
-                    console.log('map.data: ', map.data);
+                    // console.log('map.data: ', map.data);
                     map.data.loadGeoJson('/places.geojson');
-                    // this.setState({ quizmap: map });
+                    this.setState({ quizmap: map });
                 }}
                 options={googleMapOptions}
             >

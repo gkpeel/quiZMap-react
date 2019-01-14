@@ -15,16 +15,19 @@ class Timer extends Component {
 
     gameStart = () => {
         if (this.props.timerRunning) {
-            this.startCountDown();
+            this.startCountDown()
+        }
+    }
+
+    gamePause = () => {
+        if (!this.props.timerRunning) {
+            this.pauseCountDown();
         }
     }
 
     setMins = () => {
         var min = Math.floor((this.state.secondsRemaining + 1) / 60);
-
-        this.setState({
-            minutes: min
-        })
+        this.setState({ minutes: min })
     }
 
     componentDidMount() {
@@ -34,6 +37,9 @@ class Timer extends Component {
     componentDidUpdate(prevProps) {
         if (!prevProps.timerRunning && this.props.timerRunning) {
             this.gameStart();
+        }
+        if (prevProps.timerRunning && !this.props.timerRunning) {
+            this.gamePause();
         }
     }
 
@@ -65,13 +71,10 @@ class Timer extends Component {
     }
 
     startCountDown = () => {
-        if (this.props.timerRunning) {
-            this.intervalHandle = setInterval(this.tick, 1000);
-        }
+        this.intervalHandle = setInterval(this.tick, 1000);
     }
 
     pauseCountDown = () => {
-        this.props.toggleTimer();
         clearInterval(this.intervalHandle);
     }
 
@@ -83,7 +86,6 @@ class Timer extends Component {
             isOn: false
         })
         this.setMins();
-        this.props.toggleGame();
     }
 
     render() {

@@ -8,23 +8,18 @@ import "./App.css";
 class App extends Component {
 
   state = {
+    gameStarted: false,
+    gameOver: false,
     timerRunning: false,
-    gameOver: false
-  }
-
-  toggleTimer = () => {
-    if (this.state.gameStarted === false) {
-      this.setState({ gameStarted: true })
-    }
-    if (this.state.timerRunning === false) {
-      this.setState({ timerRunning: true })
-    } else {
-      this.setState({ timerRunning: false })
-    }
   }
 
   correctGuess = (correctGuessInput) => {
     this.setState({ correctGuess: correctGuessInput });
+  }
+
+  toggleTimer = () => {
+    let timerValue = this.state.timerRunning;
+    this.setState({ timerRunning: !timerValue })
   }
 
   render() {
@@ -60,9 +55,7 @@ class App extends Component {
               correctGuess={this.state.correctGuess}
             />
           </div>
-
         </LoadScript>
-        {/* <button onClick={this.gameStart}>Start Game</button> */}
       </div >
     );
   }
