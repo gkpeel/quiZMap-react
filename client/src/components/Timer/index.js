@@ -13,34 +13,38 @@ class Timer extends Component {
     }
     intervalHandle;
 
-    gameStart = () => {
-        if (this.props.timerRunning) {
-            this.startCountDown()
-        }
-    }
-
-    gamePause = () => {
-        if (!this.props.timerRunning) {
-            this.pauseCountDown();
-        }
-    }
-
-    setMins = () => {
-        var min = Math.floor((this.state.secondsRemaining + 1) / 60);
-        this.setState({ minutes: min })
-    }
-
     componentDidMount() {
         this.setMins();
     }
 
     componentDidUpdate(prevProps) {
         if (!prevProps.timerRunning && this.props.timerRunning) {
-            this.gameStart();
+            // this.gameStart()
+            this.startCountDown()
         }
         if (prevProps.timerRunning && !this.props.timerRunning) {
-            this.gamePause();
+            // this.gamePause()
+            this.pauseCountDown()
         }
+        if (!prevProps.gameOver && this.props.gameOver) {
+            this.setState({
+                seconds: "00",
+                minutes: 0,
+                secondsRemaining: 0
+            })
+        }
+        if (prevProps.gameOver && !this.props.gameOver) {
+            this.setState({ secondsRemaining: 899 })
+            this.props.startGame()
+        }
+    }
+
+    startCountDown = () => {
+        this.intervalHandle = setInterval(this.tick, 1000);
+    }
+
+    pauseCountDown = () => {
+        clearInterval(this.intervalHandle);
     }
 
     tick = () => {
@@ -70,22 +74,21 @@ class Timer extends Component {
         this.state.secondsRemaining--
     }
 
-    startCountDown = () => {
-        this.intervalHandle = setInterval(this.tick, 1000);
+    setMins = () => {
+        var min = Math.floor((this.state.secondsRemaining + 1) / 60);
+        this.setState({ minutes: min })
     }
 
-    pauseCountDown = () => {
-        clearInterval(this.intervalHandle);
-    }
-
-    resetCountDown = () => {
-        this.pauseCountDown();
-        this.setState({
-            secondsRemaining: 899,
-            seconds: "00",
-            isOn: false
-        })
-        this.setMins();
+    renderStartButton = () => {
+        if (this.props.gameStarted) {
+            if (this.props.timerRunning) {
+                return 'Pause'
+            } else {
+                return 'Resume'
+            }
+        } else {
+            return 'Start'
+        }
     }
 
     render() {
@@ -95,12 +98,17 @@ class Timer extends Component {
                     {this.state.minutes}:{this.state.seconds}
                 </h1>
                 <div className="d-flex">
-                    <button onClick={this.props.toggleTimer} style={buttonStyling} className="btn btn-primary">
-                        {this.props.timerRunning ? 'Pause' : 'Start'}
+                    <button onClick={this.props.gameStarted ? this.props.toggleTimer : this.props.startGame} style={buttonStyling} className="btn btn-primary">
+                        {this.renderStartButton()}
                     </button>
-                    <button onClick={this.resetCountDown} style={buttonStyling} className="btn btn-danger">
-                        Restart
-                </button>
+                    <button
+                        onClick={this.props.endGame}
+                        style={buttonStyling}
+                        className="btn btn-danger"
+                        disabled={!this.props.gameStarted}
+                    >
+                        Give Up
+                    </button>
                 </div>
             </div>
         )

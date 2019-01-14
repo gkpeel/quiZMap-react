@@ -16,6 +16,7 @@ class CountryGuess extends Component {
             console.log('guessed a new country');
             this.props.correctGuess(this.state.currentGuess);
             this.state.countriesGuessed.push(this.state.currentGuess);
+            this.props.setScore(this.state.countriesGuessed.length);
             this.setState({
                 currentGuess: ""
             })
@@ -35,10 +36,21 @@ class CountryGuess extends Component {
                 this.setState({
                     countriesToGuess: countryArray
                 });
+                this.props.setMaxScore(this.state.countriesToGuess.length);
             })
             .catch(err => {
                 console.log(err);
             });
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.gameOver && !this.props.gameOver) {
+            this.setState({ countriesGuessed: [] })
+        }
+        if (!prevProps.gameOver && this.state.countriesGuessed.length === this.state.countriesToGuess.length) {
+            this.props.endGame()
+            // console.log('working')
+        }
     }
 
     // update value of the component's state.currentGuess
@@ -48,7 +60,6 @@ class CountryGuess extends Component {
         this.setState({
             [name]: value
         }, this.checkGuess);
-
     };
 
     render() {
@@ -66,7 +77,12 @@ class CountryGuess extends Component {
                 </form>
                 <div className="all-countries">
                     {this.state.countriesToGuess.map((country, i) =>
-                        <Country key={i} country={country} guessed={this.state.countriesGuessed.includes(country) ? true : false} />
+                        <Country
+                            key={i}
+                            country={country}
+                            guessed={this.state.countriesGuessed.includes(country) ? true : false}
+                            gameOver={this.props.gameOver}
+                        />
                     )}
                 </div>
 

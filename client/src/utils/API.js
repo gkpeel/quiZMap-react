@@ -5,6 +5,7 @@ export default {
         // console.log(map);
         axios.get("/api/" + countryName)
             .then(response => {
+                console.log(map.Data);
                 return response;
             })
     }
