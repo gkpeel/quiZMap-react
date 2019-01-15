@@ -22,6 +22,10 @@ class CountryGuess extends Component {
         }
     }
 
+    submitHandler = event => {
+        event.preventDefault()
+    }
+
     // when component loads get the list of countries to guess
     componentDidMount() {
         axios.get("/api/countries")
@@ -51,17 +55,18 @@ class CountryGuess extends Component {
 
     // update value of the component's state.currentGuess
     handleInputChange = event => {
-        const value = event.target.value;
-        const name = event.target.name;
+        event.preventDefault()
+        const value = event.target.value
+        const name = event.target.name
         this.setState({
             [name]: value
-        }, this.checkGuess);
+        }, this.checkGuess)
     };
 
     render() {
         return (
             <div>
-                <form className="form guess-input" style={{ marginBottom: "2rem" }}>
+                <form onSubmit={this.submitHandler} className="form guess-input" style={{ marginBottom: "2rem" }}>
                     <input
                         type="text"
                         name="currentGuess"

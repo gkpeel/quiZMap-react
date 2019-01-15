@@ -1,35 +1,14 @@
+
 /* global google */
-import React, { Component } from "react";
-import { GoogleMap } from "react-google-maps-api";
-import MapAppearance from "../../utils/MapAppearance";
-import API from "../../utils/API.js";
+const MapFunctions = {
 
-const googleMapOptions = {
-    styles: MapAppearance,
-    fullscreenControl: false,
-    mapTypeControl: false,
-    streetViewControl: false,
-    maxZoom: 6,
-    minZoom: 3
-}
-
-class Map extends Component {
-
-    state = {
-        quizmap: null,
-        lastValidCenter: null,
-    }
-
-    componentDidMount() {
-    }
-
-    setStyles = (map) => {
+    setStyles: (map) => {
         map.data.setStyle({
             fillColor: '#FF0000'
         })
-    }
+    },
 
-    setOutOfBoundsListener = () => {
+    setOutOfBoundsListener: () => {
         this.state.quizmap.addListener('dragend', () => {
             this.checkLatitude(this.state.quizmap);
         });
@@ -39,14 +18,21 @@ class Map extends Component {
         this.state.quizmap.addListener(this.state.quizmap, 'zoom_changed', () => {
             this.checkLatitude(this.state.quizmap);
         });
-    };
+    },
 
-    setFeatureListener = () => {
+    setFeatureListener: () => {
         this.state.quizmap.data.addListener('addfeature', (e) => {
+            //check for a polygon
             if (e.feature.getGeometry().getType() === 'Polygon' || e.feature.getGeometry().getType() === 'MultiPolygon') {
+                // //initialize the bounds
+                console.log(e)
                 var bounds = new google.maps.LatLngBounds();
+                console.log(bounds);
+
+                //iterate over the paths
                 e.feature.getGeometry().getArray().forEach(function (path) {
 
+                    //
                     if (e.feature.getGeometry().getType() === 'Polygon') {
                         // iterate over the points in the path
                         path.getArray().forEach(function (latLng) {
@@ -64,15 +50,22 @@ class Map extends Component {
                     }
 
                 });
+
+                console.log(bounds);
+
+                // now use the bounds
+                e.feature.setProperty('bounds', bounds);
+
                 this.state.quizmap.fitBounds(bounds);
 
+                // console.log(e);
 
             }
         })
-    }
+    },
 
 
-    checkLatitude = (map) => {
+    checkLatitude: (map) => {
         // let bounds = map.getBounds();
         let sLat = map.getBounds().getSouthWest().lat();
         let nLat = map.getBounds().getNorthEast().lat();
@@ -84,51 +77,12 @@ class Map extends Component {
         else {
             this.lastValidCenter = map.getCenter();
         }
-    }
+    },
 
-    clearMap = (map) => {
+    clearMap: (map) => {
         map.data.forEach(item => map.data.remove(item))
-    }
-
-    componentDidUpdate(prevProps) {
-        if (!prevProps.gameStarted && this.props.gameStarted) {
-            this.setStyles(this.state.quizmap);
-            this.setOutOfBoundsListener();
-            this.setFeatureListener();
-        }
-
-        if (prevProps.correctGuess !== this.props.correctGuess) {
-            API.loadCountry(this.props.correctGuess, this.state.quizmap);
-        }
-
-        if (prevProps.gameOver && !this.props.gameOver) {
-            this.clearMap(this.state.quizmap)
-        }
-    }
-
-    render() {
-        return (
-
-            <GoogleMap
-                id="quizMap-gameDisplay"
-                mapContainerStyle={{
-                    height: "100vh",
-                    width: "100%"
-                }}
-                zoom={4}
-                center={{
-                    lat: 39.9526,
-                    lng: -75.1652
-                }}
-                onLoad={(map) => {
-                    this.setState({ quizmap: map });
-                }}
-                options={googleMapOptions}
-            >
-            </GoogleMap>
-        )
     }
 
 }
 
-export default Map;
+export default MapFunctions
