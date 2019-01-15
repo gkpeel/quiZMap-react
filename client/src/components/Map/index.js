@@ -8,6 +8,8 @@ const googleMapOptions = {
     fullscreenControl: false,
     mapTypeControl: false,
     streetViewControl: false,
+    maxZoom: 6,
+    minZoom: 3
 }
 
 class Map extends Component {
@@ -16,8 +18,32 @@ class Map extends Component {
         quizmap: null
     }
 
-    componentDidUpdate() {
-        API.loadCountry(this.props.correctGuess, this.state.quizmap);
+    componentDidMount() {
+    }
+
+    setStyles = (map) => {
+        console.log(map.data);
+        map.data.setStyle({
+            fillColor: '#FF0000'
+        })
+    }
+
+    clearMap = (map) => {
+        map.data.forEach(item => map.data.remove(item))
+    }
+
+    componentDidUpdate(prevProps) {
+        if (!prevProps.gameStarted && this.props.gameStarted) {
+            this.setStyles(this.state.quizmap);
+        }
+
+        if (prevProps.correctGuess !== this.props.correctGuess) {
+            API.loadCountry(this.props.correctGuess, this.state.quizmap);
+        }
+
+        if (prevProps.gameOver && !this.props.gameOver) {
+            this.clearMap(this.state.quizmap)
+        }
     }
 
     render() {
@@ -30,16 +56,15 @@ class Map extends Component {
                     width: "100%"
                 }}
                 zoom={4}
-                maxZoom={6}
                 center={{
                     lat: 39.9526,
                     lng: -75.1652
                 }}
                 onLoad={(map) => {
-
                     // console.log('map.data: ', map.data);
-                    map.data.loadGeoJson('/places.geojson');
+                    // map.data.loadGeoJson('/places.geojson');
                     this.setState({ quizmap: map });
+                    // this.state.quizmap.setStyle({ fillColor: '#FF0000' })
                 }}
                 options={googleMapOptions}
             >

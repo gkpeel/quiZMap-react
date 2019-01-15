@@ -21,7 +21,7 @@ class ScreenOverlay extends Component {
                             {this.props.score === this.props.maxScore ? 'You won!' : 'Game Over!'}
                         </h1>
                         <h1 style={{ fontWeight: 100, fontStyle: "italic" }} className="display-4 mb-5 text-center">
-                            {this.props.score === this.props.maxScore ? `You answered all ${this.props.maxScore} countries correct! Great job!` : `You scored ${this.props.score} out of ${this.props.maxScore}!`}
+                            {this.props.score === this.props.maxScore ? `You answered all ${this.props.maxScore} countries! Great job!` : `You scored ${this.props.score} out of ${this.props.maxScore}!`}
                         </h1>
                         <button
                             style={{ backgroundColor: "#599DE2", borderColor: "#599DE2" }}

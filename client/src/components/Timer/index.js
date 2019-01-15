@@ -37,6 +37,9 @@ class Timer extends Component {
             this.setState({ secondsRemaining: 899 })
             this.props.startGame()
         }
+        if (!prevProps.gameOver && this.state.secondsRemaining === 0) {
+            this.props.endGame();
+        }
     }
 
     startCountDown = () => {
@@ -56,7 +59,7 @@ class Timer extends Component {
             seconds: sec
         })
 
-        if (sec < 10) {
+        if (sec < 10 && sec > 0) {
             this.setState({
                 seconds: "0" + this.state.seconds,
             })

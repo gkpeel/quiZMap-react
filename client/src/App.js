@@ -11,12 +11,16 @@ class App extends Component {
     gameStarted: false,
     gameOver: false,
     timerRunning: false,
+    score: 0
   }
 
   startGame = () => {
-    this.setState({ gameStarted: true })
-    this.setState({ timerRunning: true })
-    this.setState({ gameOver: false })
+    this.setState({
+      gameStarted: true,
+      timerRunning: true,
+      gameOver: false,
+      score: 0
+    })
   }
 
   endGame = () => {
@@ -64,7 +68,6 @@ class App extends Component {
           language={"en"}
           region={"EN"}
           version={"weekly"}
-          // onLoad={() => console.log("script loaded")}
           loadingElement={<div>Loading...</div>}
         >
           <div
@@ -84,6 +87,8 @@ class App extends Component {
               maxScore={this.state.maxScore}
             />
             <Map
+              gameStarted={this.state.gameStarted}
+              gameOver={this.state.gameOver}
               correctGuess={this.state.correctGuess}
             />
           </div>

@@ -2,11 +2,15 @@ import axios from "axios";
 
 export default {
     loadCountry: (countryName, map) => {
-        // console.log(map);
-        axios.get("/api/" + countryName)
-            .then(response => {
-                console.log(map.Data);
-                return response;
-            })
+        if (countryName) {
+            // console.log(map);
+            axios.get("/api/" + countryName)
+                .then(response => {
+                    console.log(response.data);
+                    let addedCountry = map.data.addGeoJson(response.data, { idPropertyName: response.data.properties.ADMIN })
+                    console.log(addedCountry);
+                    console.log(map.data.contains('Cuba'));
+                })
+        }
     }
 }

@@ -12,8 +12,7 @@ class CountryGuess extends Component {
 
 
     checkGuess = () => {
-        if (this.state.countriesToGuess.includes(this.state.currentGuess)) {
-            console.log('guessed a new country');
+        if (this.state.countriesToGuess.includes(this.state.currentGuess) && !this.state.countriesGuessed.includes(this.state.currentGuess)) {
             this.props.correctGuess(this.state.currentGuess);
             this.state.countriesGuessed.push(this.state.currentGuess);
             this.props.setScore(this.state.countriesGuessed.length);
@@ -27,12 +26,10 @@ class CountryGuess extends Component {
     componentDidMount() {
         axios.get("/api/countries")
             .then(response => {
-                // console.log(response);
                 const countryArray = [];
                 response.data.forEach(countryObj => {
                     countryArray.push(countryObj.properties.ADMIN);
                 })
-                // console.log(countryArray);
                 this.setState({
                     countriesToGuess: countryArray
                 });
@@ -49,7 +46,6 @@ class CountryGuess extends Component {
         }
         if (!prevProps.gameOver && this.state.countriesGuessed.length === this.state.countriesToGuess.length) {
             this.props.endGame()
-            // console.log('working')
         }
     }
 
