@@ -65,7 +65,7 @@ class CountryGuess extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{overflow: "scroll"}}>
                 <form onSubmit={this.submitHandler} className="form guess-input" style={{ marginBottom: "2rem" }}>
                     <input
                         type="text"

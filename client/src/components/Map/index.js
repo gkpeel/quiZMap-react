@@ -20,9 +20,6 @@ class Map extends Component {
         lastValidCenter: null,
     }
 
-    componentDidMount() {
-    }
-
     setStyles = (map) => {
         map.data.setStyle({
             fillColor: '#FF0000'
@@ -64,9 +61,8 @@ class Map extends Component {
                     }
 
                 });
-                this.state.quizmap.fitBounds(bounds);
-
-
+                this.state.quizmap.panToBounds(bounds);
+                // this.state.quizmap.setCenter(this.state.quizmap.getCenter())
             }
         })
     }
