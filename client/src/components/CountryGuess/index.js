@@ -10,11 +10,22 @@ class CountryGuess extends Component {
         countriesGuessed: [],
     }
 
+    capitalizedCountry = () => {
+        return this.state.currentGuess.toLowerCase().split(' ').map((word) => {
+            if (word !== "and" && word !== "of" && word !== "the") {
+                return word.charAt(0).toUpperCase() + word.slice(1)
+                // console.log('yo')
+            } else {
+                return word
+            }
+        }).join(' ');
+    }
 
     checkGuess = () => {
-        if (this.state.countriesToGuess.includes(this.state.currentGuess) && !this.state.countriesGuessed.includes(this.state.currentGuess)) {
-            this.props.correctGuess(this.state.currentGuess);
-            this.state.countriesGuessed.push(this.state.currentGuess);
+        if (this.state.countriesToGuess.includes(this.capitalizedCountry())
+            && !this.state.countriesGuessed.includes(this.capitalizedCountry())) {
+            this.props.correctGuess(this.capitalizedCountry());
+            this.state.countriesGuessed.push(this.capitalizedCountry());
             this.props.setScore(this.state.countriesGuessed.length);
             this.setState({
                 currentGuess: ""
