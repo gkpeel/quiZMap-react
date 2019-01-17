@@ -60,6 +60,10 @@ class App extends Component {
     this.setState({ hoverInfo: hoverInfo })
   }
 
+  setSecondsRemaining = (secondsRemaining) => {
+    this.setState({ secondsRemaining: secondsRemaining });
+  }
+
 
   render() {
     return (
@@ -75,6 +79,7 @@ class App extends Component {
           setMaxScore={this.setMaxScore}
           setScore={this.setScore}
           getUnanswered={this.getUnanswered}
+          setSecondsRemaining={this.setSecondsRemaining}
         />
 
         <LoadScript
@@ -83,7 +88,11 @@ class App extends Component {
           language={"en"}
           region={"EN"}
           version={"weekly"}
-          loadingElement={<div>Loading...</div>}
+          loadingElement={
+            <div className="d-flex justify-content-center font-concert">
+              <h1 className="mt-5 ml-5 text-muted">Loading...</h1>
+            </div>
+          }
         >
           <div
             style={{
@@ -111,12 +120,13 @@ class App extends Component {
               correctGuess={this.state.correctGuess}
               unansweredArr={this.state.unAnsweredArr}
               setHoverInfo={this.setHoverInfo}
+              secondsRemaining={this.state.secondsRemaining}
             />
           </div>
         </LoadScript>
       </div >
-    );
+    )
   }
 }
 
-export default App;
+export default App

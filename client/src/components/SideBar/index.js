@@ -27,6 +27,7 @@ class SideBar extends Component {
                         startGame={this.props.startGame}
                         endGame={this.props.endGame}
                         toggleTimer={this.props.toggleTimer}
+                        setSecondsRemaining={this.props.setSecondsRemaining}
                     />
                 </div>
             </div>

@@ -17,7 +17,8 @@ class Timer extends Component {
         this.setMins();
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
+
         if (!prevProps.timerRunning && this.props.timerRunning) {
             // this.gameStart()
             this.startCountDown()
@@ -79,7 +80,7 @@ class Timer extends Component {
         if (min === 0 & sec === 0) {
             clearInterval(this.intervalHandle);
         }
-
+        this.props.setSecondsRemaining(this.state.secondsRemaining)
         this.state.secondsRemaining--
     }
 

@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { GoogleMap } from "react-google-maps-api";
 import MapAppearance from "../../utils/MapAppearance";
 import API from "../../utils/API.js";
+import { setFillColor } from "../../utils/setFillColor.js";
 
 const googleMapOptions = {
     styles: MapAppearance,
@@ -41,6 +42,7 @@ class Map extends Component {
 
     setMouseListener = () => {
         this.state.quizmap.data.addListener('mouseover', (e) => {
+            console.log(e);
             this.props.setHoverInfo(e.feature.l.ADMIN)
         })
         this.state.quizmap.data.addListener('mouseout', (e) => {
@@ -62,6 +64,8 @@ class Map extends Component {
 
     setFeatureListener = () => {
         this.state.quizmap.data.addListener('addfeature', (e) => {
+            console.log(e)
+            this.state.quizmap.data.overrideStyle(e.feature, setFillColor(this.props.secondsRemaining))
             if (e.feature.getGeometry().getType() === 'Polygon' || e.feature.getGeometry().getType() === 'MultiPolygon') {
                 var bounds = new google.maps.LatLngBounds();
                 e.feature.getGeometry().getArray().forEach(function (path) {
@@ -90,10 +94,6 @@ class Map extends Component {
         })
     }
 
-    // removeFeatureListener = new Promise((resolve, reject) => {
-    //     google.maps.event.clearListeners(this.state.quizmap, 'addfeature');
-    // })
-
     checkLatitude = (map) => {
         // let bounds = map.getBounds();
         let sLat = map.getBounds().getSouthWest().lat();
@@ -110,7 +110,7 @@ class Map extends Component {
 
     loadUnaswered = (unansweredArr) => {
         unansweredArr.forEach((unAnsweredCountry) => {
-            API.loadCountry(unAnsweredCountry, this.state.quizmap);
+            API.loadCountry(this.state.quizmap, unAnsweredCountry);
         })
     }
 
@@ -127,18 +127,13 @@ class Map extends Component {
         }
 
         if (prevProps.correctGuess !== this.props.correctGuess) {
-            API.loadCountry(this.props.correctGuess, this.state.quizmap);
+            API.loadCountry(this.state.quizmap, this.props.correctGuess, this.props.secondsRemaining);
         }
 
         if (prevProps.gameOver && !this.props.gameOver) {
             this.clearMap(this.state.quizmap)
             this.setFeatureListener();
         }
-
-        // if (prevProps.correctGuess === 'Cuba' && this.props.correctGuess !== "Cuba") {
-        //     // google.maps.event.removeListener(this.setFeatureListener);
-        //     console.log(this.state.quizmap)
-        // }
 
         if (prevProps.unansweredArr === null && this.props.unansweredArr) {
             google.maps.event.clearListeners(this.state.quizmap.data, "addfeature");
