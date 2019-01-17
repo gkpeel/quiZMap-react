@@ -1,0 +1,11 @@
+.nicebox {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 5;
+    font-size: 2rem;
+    padding: 0.75rem;
+    background-color: #eaeaea;
+    box-shadow: 3px 2px 3px 2px #888;
+    transition: all 300ms ease-in-out;
+}

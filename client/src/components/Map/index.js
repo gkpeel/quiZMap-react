@@ -41,7 +41,10 @@ class Map extends Component {
 
     setMouseListener = () => {
         this.state.quizmap.data.addListener('mouseover', (e) => {
-            console.log('mouse over:' + e.feature.l.ADMIN);
+            this.props.setHoverInfo(e.feature.l.ADMIN)
+        })
+        this.state.quizmap.data.addListener('mouseout', (e) => {
+            this.props.setHoverInfo("???????????????")
         })
     }
 

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { LoadScript } from 'react-google-maps-api';
 import SideBar from "./components/SideBar";
 import ScreenOverlay from "./components/ScreenOverlay";
+import Nicebox from "./components/Nicebox";
 import Map from "./components/Map";
 import "./App.css";
 
@@ -12,7 +13,8 @@ class App extends Component {
     gameOver: false,
     timerRunning: false,
     score: 0,
-    unAnsweredArr: null
+    unAnsweredArr: null,
+    hoverInfo: "???????????????"
   }
 
   startGame = () => {
@@ -52,6 +54,10 @@ class App extends Component {
     this.setState({ unAnsweredArr: unAnsweredArr })
     // console.log(this.state.unAnsweredArr);
     // console.log(unAnsweredArr);
+  }
+
+  setHoverInfo = (hoverInfo) => {
+    this.setState({ hoverInfo: hoverInfo })
   }
 
 
@@ -95,11 +101,16 @@ class App extends Component {
               score={this.state.score}
               maxScore={this.state.maxScore}
             />
+            <Nicebox
+              gameStarted={this.state.gameStarted}
+              hoverInfo={this.state.hoverInfo}
+            />
             <Map
               gameStarted={this.state.gameStarted}
               gameOver={this.state.gameOver}
               correctGuess={this.state.correctGuess}
               unansweredArr={this.state.unAnsweredArr}
+              setHoverInfo={this.setHoverInfo}
             />
           </div>
         </LoadScript>
