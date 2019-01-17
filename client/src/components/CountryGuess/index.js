@@ -22,6 +22,16 @@ class CountryGuess extends Component {
         }
     }
 
+    getUnanswered = () => {
+        let retval = [];
+        this.state.countriesToGuess.forEach((country) => {
+            if (!this.state.countriesGuessed.includes(country)) {
+                retval.push(country);
+            }
+        })
+        this.props.getUnanswered(retval);
+    }
+
     submitHandler = event => {
         event.preventDefault()
     }
@@ -51,6 +61,10 @@ class CountryGuess extends Component {
         if (!prevProps.gameOver && this.state.countriesGuessed.length === this.state.countriesToGuess.length) {
             this.props.endGame()
         }
+
+        if (!prevProps.gameOver && this.props.gameOver) {
+            this.getUnanswered();
+        }
     }
 
     // update value of the component's state.currentGuess
@@ -65,7 +79,7 @@ class CountryGuess extends Component {
 
     render() {
         return (
-            <div style={{overflow: "scroll"}}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
                 <form onSubmit={this.submitHandler} className="form guess-input" style={{ marginBottom: "2rem" }}>
                     <input
                         type="text"
@@ -76,7 +90,11 @@ class CountryGuess extends Component {
                         disabled={!this.props.timerRunning}
                     />
                 </form>
-                <div className="all-countries">
+                <Scoreboard
+                    countriesGuessed={this.state.countriesGuessed.length}
+                    countriesToGuess={this.state.countriesToGuess.length}
+                />
+                <div className="all-countries" style={{ overflow: "scroll" }}>
                     {this.state.countriesToGuess.map((country, i) =>
                         <Country
                             key={i}
@@ -86,11 +104,6 @@ class CountryGuess extends Component {
                         />
                     )}
                 </div>
-
-                <Scoreboard
-                    countriesGuessed={this.state.countriesGuessed.length}
-                    countriesToGuess={this.state.countriesToGuess.length}
-                />
             </div>
         )
 

@@ -16,6 +16,10 @@ const googleMapOptions = {
 class Map extends Component {
 
     state = {
+        center: {
+            lat: 39.9526,
+            lng: -75.1652
+        },
         quizmap: null,
         lastValidCenter: null,
     }
@@ -23,6 +27,21 @@ class Map extends Component {
     setStyles = (map) => {
         map.data.setStyle({
             fillColor: '#FF0000'
+        })
+    }
+
+    setChangeCenter = () => {
+        this.state.quizmap.addListener('tilesloaded', (e) => {
+            console.log('setting new center')
+            let newCenter = this.state.quizmap.getCenter()
+            this.setState({ center: newCenter })
+            console.log('new center set')
+        })
+    }
+
+    setMouseListener = () => {
+        this.state.quizmap.data.addListener('mouseover', (e) => {
+            console.log('mouse over:' + e.feature.l.ADMIN);
         })
     }
 
@@ -61,12 +80,16 @@ class Map extends Component {
                     }
 
                 });
-                this.state.quizmap.panToBounds(bounds);
-                // this.state.quizmap.setCenter(this.state.quizmap.getCenter())
+                this.state.quizmap.panToBounds(bounds, 150);
+                // this.state.quizmap.setCenter(newCenter)
+
             }
         })
     }
 
+    // removeFeatureListener = new Promise((resolve, reject) => {
+    //     google.maps.event.clearListeners(this.state.quizmap, 'addfeature');
+    // })
 
     checkLatitude = (map) => {
         // let bounds = map.getBounds();
@@ -82,6 +105,12 @@ class Map extends Component {
         }
     }
 
+    loadUnaswered = (unansweredArr) => {
+        unansweredArr.forEach((unAnsweredCountry) => {
+            API.loadCountry(unAnsweredCountry, this.state.quizmap);
+        })
+    }
+
     clearMap = (map) => {
         map.data.forEach(item => map.data.remove(item))
     }
@@ -91,6 +120,7 @@ class Map extends Component {
             this.setStyles(this.state.quizmap);
             this.setOutOfBoundsListener();
             this.setFeatureListener();
+            this.setMouseListener();
         }
 
         if (prevProps.correctGuess !== this.props.correctGuess) {
@@ -99,7 +129,19 @@ class Map extends Component {
 
         if (prevProps.gameOver && !this.props.gameOver) {
             this.clearMap(this.state.quizmap)
+            this.setFeatureListener();
         }
+
+        // if (prevProps.correctGuess === 'Cuba' && this.props.correctGuess !== "Cuba") {
+        //     // google.maps.event.removeListener(this.setFeatureListener);
+        //     console.log(this.state.quizmap)
+        // }
+
+        if (prevProps.unansweredArr === null && this.props.unansweredArr) {
+            google.maps.event.clearListeners(this.state.quizmap.data, "addfeature");
+            this.loadUnaswered(this.props.unansweredArr);
+        }
+
     }
 
     render() {
@@ -112,10 +154,7 @@ class Map extends Component {
                     width: "100%"
                 }}
                 zoom={4}
-                center={{
-                    lat: 39.9526,
-                    lng: -75.1652
-                }}
+                center={this.state.center}
                 onLoad={(map) => {
                     this.setState({ quizmap: map });
                 }}

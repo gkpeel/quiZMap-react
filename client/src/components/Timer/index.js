@@ -59,6 +59,12 @@ class Timer extends Component {
             seconds: sec
         })
 
+        if (sec === 0) {
+            this.setState({
+                seconds: "00"
+            })
+        }
+
         if (sec < 10 && sec > 0) {
             this.setState({
                 seconds: "0" + this.state.seconds,

@@ -18,6 +18,7 @@ class SideBar extends Component {
                         setMaxScore={this.props.setMaxScore}
                         setScore={this.props.setScore}
                         endGame={this.props.endGame}
+                        getUnanswered={this.props.getUnanswered}
                     />
                     <Timer
                         gameStarted={this.props.gameStarted}

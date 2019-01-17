@@ -3,11 +3,32 @@ import logo from "../../img/quizmap-logo.svg";
 import "./index.css";
 
 class ScreenOverlay extends Component {
+    state = {
+        overlayActive: true
+    }
+
+    toggleOverlay = () => {
+        if ((!this.props.timerRunning || this.props.gameOver)) {
+            this.setState({ overlayActive: true })
+        } else {
+            this.setState({ overlayActive: false })
+        }
+    }
+
+    clearOverlay = () => {
+        this.setState({ overlayActive: false })
+    }
+
+    componentDidUpdate = (prevProps) => {
+        if (prevProps.timerRunning && !this.props.timerRunning) {
+            this.toggleOverlay();
+        }
+    }
 
     render() {
         if (this.props.gameOver) {
             return (
-                <div className={this.props.timerRunning ? (`loadScreenStyle`) : (`loadScreenStyle active`)}>
+                <div className={this.state.overlayActive ? 'loadScreenStyle active' : 'loadScreenStyle'}>
                     <div className="loadCopyContainer">
                         <img
                             src={logo}
@@ -23,20 +44,29 @@ class ScreenOverlay extends Component {
                         <h1 style={{ fontWeight: 100, fontStyle: "italic" }} className="display-4 mb-5 text-center">
                             {this.props.score === this.props.maxScore ? `You answered all ${this.props.maxScore} countries! Great job!` : `You scored ${this.props.score} out of ${this.props.maxScore}!`}
                         </h1>
-                        <button
-                            style={{ backgroundColor: "#599DE2", borderColor: "#599DE2" }}
-                            className="mx-auto d-block w-50 btn btn-lg btn-primary"
-                            onClick={this.props.startGame}
-                        >
-                            Play again?
-                    </button>
+                        <div className="buttons-container" style={{ display: "flex" }}>
+                            <button
+                                style={{ backgroundColor: "#599DE2", borderColor: "#599DE2" }}
+                                className="mr-2 d-block w-50 btn btn-lg btn-primary"
+                                onClick={this.props.startGame}
+                            >
+                                Play again?
+                            </button>
+                            <button
+                                style={{ backgroundColor: "#599DE2", borderColor: "#599DE2" }}
+                                className="ml-2 d-block w-50 btn btn-lg btn-primary"
+                                onClick={() => this.clearOverlay()}
+                            >
+                                Review
+                            </button>
+                        </div>
                     </div>
                 </div>
             )
         }
         else if (!this.props.gameStarted && !this.props.timerRunning) {
             return (
-                <div className={this.props.timerRunning ? (`loadScreenStyle`) : (`loadScreenStyle active`)}>
+                <div className={this.state.overlayActive ? 'loadScreenStyle active' : 'loadScreenStyle'}>
                     <div className="loadCopyContainer">
                         <img
                             src={logo}
@@ -63,7 +93,7 @@ class ScreenOverlay extends Component {
         }
         else if (this.props.gameStarted && !this.props.timerRunning) {
             return (
-                <div className={this.props.timerRunning ? (`loadScreenStyle`) : (`loadScreenStyle active`)}>
+                <div className={this.state.overlayActive ? 'loadScreenStyle active' : 'loadScreenStyle'}>
                     <div className="loadCopyContainer">
                         <img
                             src={logo}

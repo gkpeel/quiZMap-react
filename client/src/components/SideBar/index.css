@@ -14,9 +14,7 @@
 }
 
 .score-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: block;
 }
 
 .guess-input {

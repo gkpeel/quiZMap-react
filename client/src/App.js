@@ -11,7 +11,8 @@ class App extends Component {
     gameStarted: false,
     gameOver: false,
     timerRunning: false,
-    score: 0
+    score: 0,
+    unAnsweredArr: null
   }
 
   startGame = () => {
@@ -19,7 +20,8 @@ class App extends Component {
       gameStarted: true,
       timerRunning: true,
       gameOver: false,
-      score: 0
+      score: 0,
+      unAnsweredArr: null
     })
   }
 
@@ -46,6 +48,12 @@ class App extends Component {
     this.setState({ score: countriesGuessed })
   }
 
+  getUnanswered = (unAnsweredArr) => {
+    this.setState({ unAnsweredArr: unAnsweredArr })
+    // console.log(this.state.unAnsweredArr);
+    // console.log(unAnsweredArr);
+  }
+
 
   render() {
     return (
@@ -60,6 +68,7 @@ class App extends Component {
           correctGuess={this.correctGuess}
           setMaxScore={this.setMaxScore}
           setScore={this.setScore}
+          getUnanswered={this.getUnanswered}
         />
 
         <LoadScript
@@ -90,6 +99,7 @@ class App extends Component {
               gameStarted={this.state.gameStarted}
               gameOver={this.state.gameOver}
               correctGuess={this.state.correctGuess}
+              unansweredArr={this.state.unAnsweredArr}
             />
           </div>
         </LoadScript>
