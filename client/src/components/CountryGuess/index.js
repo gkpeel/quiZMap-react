@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Scoreboard from "../Scoreboard";
 import Country from "../Country";
+import { EdgeCases } from "../../utils/EdgeCases.js";
 
 class CountryGuess extends Component {
     state = {
@@ -11,10 +12,12 @@ class CountryGuess extends Component {
     }
 
     capitalizedCountry = () => {
-        return this.state.currentGuess.toLowerCase().split(' ').map((word) => {
+        return this.state.currentGuess.toLowerCase().split(' ').map((word, i) => {
+            if (i === 0 && word === "the") {
+                return word.charAt(0).toUpperCase() + word.slice(1)
+            }
             if (word !== "and" && word !== "of" && word !== "the") {
                 return word.charAt(0).toUpperCase() + word.slice(1)
-                // console.log('yo')
             } else {
                 return word
             }
@@ -22,14 +25,29 @@ class CountryGuess extends Component {
     }
 
     checkGuess = () => {
-        if (this.state.countriesToGuess.includes(this.capitalizedCountry())
-            && !this.state.countriesGuessed.includes(this.capitalizedCountry())) {
-            this.props.correctGuess(this.capitalizedCountry());
+        if (this.checkCountriesToGuess() || this.checkEdgeCases()) {
             this.state.countriesGuessed.push(this.capitalizedCountry());
             this.props.setScore(this.state.countriesGuessed.length);
             this.setState({
                 currentGuess: ""
             })
+        };
+    }
+
+    checkCountriesToGuess = () => {
+        if (this.state.countriesToGuess.includes(this.capitalizedCountry())
+            && !this.state.countriesGuessed.includes(this.capitalizedCountry())) {
+            this.props.correctGuess(this.capitalizedCountry());
+            return true;
+        }
+    }
+
+    checkEdgeCases = () => {
+        let edgeCaseGuess = this.capitalizedCountry()
+        if (EdgeCases[edgeCaseGuess]) {
+            console.log(EdgeCases[edgeCaseGuess])
+            this.props.correctGuess(EdgeCases[edgeCaseGuess]);
+            return true
         }
     }
 
@@ -72,7 +90,6 @@ class CountryGuess extends Component {
         if (!prevProps.gameOver && this.state.countriesGuessed.length === this.state.countriesToGuess.length) {
             this.props.endGame()
         }
-
         if (!prevProps.gameOver && this.props.gameOver) {
             this.getUnanswered();
         }
