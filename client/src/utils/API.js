@@ -2,6 +2,7 @@ import axios from "axios";
 
 export default {
     loadCountry: (map, countryName) => {
+        console.log(countryName);
         if (countryName) {
             axios.get("/api/" + countryName)
                 .then(response => {

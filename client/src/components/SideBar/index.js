@@ -11,6 +11,7 @@ class SideBar extends Component {
                 <div className="guess-container">
                     <h1 className="mb-4 font-concert">Guess a Country</h1>
                     <CountryGuess
+                        quizType={this.props.quizType}                    
                         gameStarted={this.props.gameStarted}
                         gameOver={this.props.gameOver}
                         timerRunning={this.props.timerRunning}

@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Concert+One');
+
+.font-concert {
+    font-family: 'Concert One', sans-serif;
+}
+
+.App {
+    display: flex;
+}

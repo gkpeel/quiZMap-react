@@ -14,12 +14,20 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/worldcountries");
+mongoose.connect((process.env.MONGODB_URI || "mongodb://localhost/worldcountries"), { useNewUrlParser: true });
 
 //collect the list of countries to guess and place them in alphabetical order
-app.get("/api/countries", (req, res) => {
+app.get("/api/continent/world", (req, res) => {
   db.Country
     .find({}, { "properties.ADMIN": 1 }, { sort: { 'properties.ADMIN': 1 } })
+    .then(dbModel => { res.json(dbModel) })
+    .catch(err => res.status(422).json(err));
+})
+
+app.get("/api/continent/:continent", (req, res) => {
+  console.log(req.params.continent);
+  db.Country
+    .find({ "properties.continent": req.params.continent }, { "properties.ADMIN": 1 }, { sort: { 'properties.ADMIN': 1 } })
     .then(dbModel => { res.json(dbModel) })
     .catch(err => res.status(422).json(err));
 })

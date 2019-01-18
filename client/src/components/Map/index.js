@@ -42,7 +42,6 @@ class Map extends Component {
 
     setMouseListener = () => {
         this.state.quizmap.data.addListener('mouseover', (e) => {
-            console.log(e);
             this.props.setHoverInfo(e.feature.l.ADMIN)
         })
         this.state.quizmap.data.addListener('mouseout', (e) => {
@@ -64,7 +63,6 @@ class Map extends Component {
 
     setFeatureListener = () => {
         this.state.quizmap.data.addListener('addfeature', (e) => {
-            console.log(e)
             this.state.quizmap.data.overrideStyle(e.feature, setFillColor(this.props.secondsRemaining))
             if (e.feature.getGeometry().getType() === 'Polygon' || e.feature.getGeometry().getType() === 'MultiPolygon') {
                 var bounds = new google.maps.LatLngBounds();

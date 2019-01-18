@@ -24,9 +24,19 @@ class CountryGuess extends Component {
         }).join(' ');
     }
 
+    buildList = (response) => {
+        const countryArray = [];
+        response.data.forEach(countryObj => {
+            countryArray.push(countryObj.properties.ADMIN);
+        })
+        this.setState({
+            countriesToGuess: countryArray
+        });
+        this.props.setMaxScore(this.state.countriesToGuess.length);
+    }
+
     checkGuess = () => {
         if (this.checkCountriesToGuess() || this.checkEdgeCases()) {
-            this.state.countriesGuessed.push(this.capitalizedCountry());
             this.props.setScore(this.state.countriesGuessed.length);
             this.setState({
                 currentGuess: ""
@@ -38,15 +48,15 @@ class CountryGuess extends Component {
         if (this.state.countriesToGuess.includes(this.capitalizedCountry())
             && !this.state.countriesGuessed.includes(this.capitalizedCountry())) {
             this.props.correctGuess(this.capitalizedCountry());
-            return true;
+            this.state.countriesGuessed.push(this.capitalizedCountry());
         }
     }
 
     checkEdgeCases = () => {
         let edgeCaseGuess = this.capitalizedCountry()
         if (EdgeCases[edgeCaseGuess]) {
-            console.log(EdgeCases[edgeCaseGuess])
             this.props.correctGuess(EdgeCases[edgeCaseGuess]);
+            this.state.countriesGuessed.push(EdgeCases[edgeCaseGuess])
             return true
         }
     }
@@ -67,20 +77,23 @@ class CountryGuess extends Component {
 
     // when component loads get the list of countries to guess
     componentDidMount() {
-        axios.get("/api/countries")
-            .then(response => {
-                const countryArray = [];
-                response.data.forEach(countryObj => {
-                    countryArray.push(countryObj.properties.ADMIN);
+        if (this.props.quizType) {
+            axios.get("/api/continent/" + this.props.quizType)
+                .then(response => {
+                    return this.buildList(response);
                 })
-                this.setState({
-                    countriesToGuess: countryArray
+                .catch(err => {
+                    console.log(err);
                 });
-                this.props.setMaxScore(this.state.countriesToGuess.length);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        } else {
+            axios.get("/api/continent/world")
+                .then(response => {
+                    return this.buildList(response);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
