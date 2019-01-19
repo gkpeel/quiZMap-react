@@ -49,6 +49,7 @@ class CountryGuess extends Component {
             && !this.state.countriesGuessed.includes(this.capitalizedCountry())) {
             this.props.correctGuess(this.capitalizedCountry());
             this.state.countriesGuessed.push(this.capitalizedCountry());
+            return true
         }
     }
 
