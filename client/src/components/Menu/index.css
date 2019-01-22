@@ -1,6 +1,6 @@
 .menu-container {
     position: absolute;
-    background-color: #4D8848;
+    background-color: #90DF3E;
     color: #fff;
     top: -439px;
     left: 0;
@@ -35,11 +35,10 @@
     left: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    background-color: #4D8848;
-    border-color:  #4D8848;
+    background-color: #90DF3E;
+    border-color:  #90DF3E;
     color: #fff;
     padding: .5rem 1.5rem;
-    z-index: 3;
 }
 
 .menu-button:hover {
@@ -84,11 +83,11 @@
         position: absolute;
         top: unset;
         left: unset;
-        bottom: 25px;
-        right: -73px;
+        bottom: 21px;
+        right: -77px;
         transform: rotate(90deg);
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        padding: .5rem 1.5rem;
+        padding: .5rem 1.5rem 1rem;
     }
 }
