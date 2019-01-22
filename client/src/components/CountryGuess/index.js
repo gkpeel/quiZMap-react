@@ -5,10 +5,15 @@ import Country from "../Country";
 import { EdgeCases } from "../../utils/EdgeCases.js";
 
 class CountryGuess extends Component {
+
     state = {
         currentGuess: "",
         countriesToGuess: [],
         countriesGuessed: [],
+    }
+
+    focusTextInput = () => {
+        this.textInput.current.focus()
     }
 
     capitalizedCountry = () => {
@@ -27,7 +32,7 @@ class CountryGuess extends Component {
     buildList = (response) => {
         const countryArray = [];
         response.data.forEach(countryObj => {
-            countryArray.push(countryObj.properties.ADMIN);
+            countryArray.push(countryObj.properties.admin);
         })
         this.setState({
             countriesToGuess: countryArray
@@ -55,8 +60,9 @@ class CountryGuess extends Component {
 
     checkEdgeCases = () => {
         let edgeCaseGuess = this.capitalizedCountry()
-        if (EdgeCases[edgeCaseGuess]) {
-            this.props.correctGuess(EdgeCases[edgeCaseGuess]);
+        if (EdgeCases[edgeCaseGuess] 
+            && !this.state.countriesGuessed.includes(EdgeCases[edgeCaseGuess])) {
+            this.props.correctGuess(EdgeCases[edgeCaseGuess])
             this.state.countriesGuessed.push(EdgeCases[edgeCaseGuess])
             return true
         }
@@ -69,6 +75,7 @@ class CountryGuess extends Component {
                 retval.push(country);
             }
         })
+        console.log(retval)
         this.props.getUnanswered(retval);
     }
 
@@ -81,6 +88,7 @@ class CountryGuess extends Component {
         if (this.props.quizType) {
             axios.get("/api/continent/" + this.props.quizType)
                 .then(response => {
+                    console.log(response)
                     return this.buildList(response);
                 })
                 .catch(err => {
@@ -97,7 +105,10 @@ class CountryGuess extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
+        if (this.props.timerRunning) {
+            this.countryInput.focus()
+        }
         if (prevProps.gameOver && !this.props.gameOver) {
             this.setState({ countriesGuessed: [] })
         }
@@ -105,7 +116,7 @@ class CountryGuess extends Component {
             this.props.endGame()
         }
         if (!prevProps.gameOver && this.props.gameOver) {
-            this.getUnanswered();
+            this.getUnanswered()
         }
     }
 
@@ -130,6 +141,7 @@ class CountryGuess extends Component {
                         value={this.state.currentGuess}
                         onChange={this.handleInputChange}
                         disabled={!this.props.timerRunning}
+                        ref={(input) => { this.countryInput = input; }} 
                     />
                 </form>
                 <Scoreboard
