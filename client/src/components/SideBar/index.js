@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
+import Menu from "../Menu"
 import Timer from "../Timer";
-import CountryGuess from "../CountryGuess";
+import CountryGuess from "../CountryGuess"
 import "./index.css";
 
 class SideBar extends Component {
@@ -9,9 +10,9 @@ class SideBar extends Component {
         return (
             <div className="guess-display">
                 <div className="guess-container">
-                    <h1 className="mb-4 font-concert">Guess a Country</h1>
+                    <h1 className="mb-4 font-concert" style={{ color: "#fff" }}>Guess a Country</h1>
                     <CountryGuess
-                        quizType={this.props.quizType}                    
+                        quizType={this.props.quizType}
                         gameStarted={this.props.gameStarted}
                         gameOver={this.props.gameOver}
                         timerRunning={this.props.timerRunning}
@@ -22,6 +23,7 @@ class SideBar extends Component {
                         getUnanswered={this.props.getUnanswered}
                     />
                     <Timer
+                        quizType={this.props.quizType}
                         gameStarted={this.props.gameStarted}
                         gameOver={this.props.gameOver}
                         timerRunning={this.props.timerRunning}
@@ -31,7 +33,8 @@ class SideBar extends Component {
                         setSecondsRemaining={this.props.setSecondsRemaining}
                     />
                 </div>
-            </div>
+                <Menu />
+            </div >
         );
     }
 }

@@ -1,0 +1,18 @@
+.country-container {
+    background-color: #fff;
+}
+
+.country-display {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    background-color: #fff;
+    padding: 6px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+
+}
+
+.country-display.game-over {
+    color: #e97777;
+}

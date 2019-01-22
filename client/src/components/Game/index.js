@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { LoadScript } from 'react-google-maps-api';
-import SideBar from "../SideBar";
-import ScreenOverlay from "../ScreenOverlay";
-import Nicebox from "../Nicebox";
-import Map from "../Map";
+import React, { Component } from "react"
+import { LoadScript } from 'react-google-maps-api'
+import SideBar from "../SideBar"
+import ScreenOverlay from "../ScreenOverlay"
+import Nicebox from "../Nicebox"
+import Map from "../Map"
 
 class Game extends Component {
 

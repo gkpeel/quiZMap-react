@@ -1,9 +1,20 @@
 import React, { Component } from "react";
 
-const buttonStyling = {
-    flex: "1 0 auto",
-    display: "block",
-    margin: "0.25rem"
+const style = {
+    pause: {
+        flex: "1 0 auto",
+        display: "block",
+        margin: "0.25rem",
+        backgroundColor: "#79C9E9",
+        borderColor: "#79C9E9"
+    },
+    quit: {
+        flex: "1 0 auto",
+        display: "block",
+        margin: "0.25rem",
+        backgroundColor: "#e97777",
+        borderColor: "#e97777"
+    }
 }
 
 class Timer extends Component {
@@ -12,6 +23,16 @@ class Timer extends Component {
         seconds: "00",
     }
     intervalHandle;
+
+    componentWillMount() {
+        if (this.props.quizType === "europe" || this.props.quizType === "oceania") {
+            this.setState({ secondsRemaining: 480 })
+        } else if (this.props.quizType === "africa" || this.props.quizType === "asia" || this.props.quizType === "north-america") {
+            this.setState({ secondsRemaining: 600 })
+        } else if (this.props.quizType === "south-america") {
+            this.setState({ secondsRemaining: 300 })
+        }
+    }
 
     componentDidMount() {
         this.setMins();
@@ -104,23 +125,26 @@ class Timer extends Component {
     render() {
         return (
             <div>
-                <h1 className="display-3 text-center">
+                <h1 className="display-3 text-center" style={{ color: "#fff" }}>
                     {this.state.minutes}:{this.state.seconds}
                 </h1>
                 <div className="d-flex">
-                    <button onClick={this.props.gameStarted ? this.props.toggleTimer : this.props.startGame} style={buttonStyling} className="btn btn-primary">
+                    <button
+                        onClick={this.props.gameStarted ? this.props.toggleTimer : this.props.startGame}
+                        style={style.pause}
+                        className="btn btn-primary">
                         {this.renderStartButton()}
                     </button>
                     <button
                         onClick={this.props.endGame}
-                        style={buttonStyling}
+                        style={style.quit}
                         className="btn btn-danger"
                         disabled={!this.props.gameStarted}
                     >
                         Give Up
                     </button>
                 </div>
-            </div>
+            </div >
         )
     }
 }

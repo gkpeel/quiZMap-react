@@ -1,8 +1,9 @@
-import React, { Component } from "react";
-import axios from "axios";
-import Scoreboard from "../Scoreboard";
-import Country from "../Country";
-import { EdgeCases } from "../../utils/EdgeCases.js";
+import React, { Component } from "react"
+import axios from "axios"
+import Scoreboard from "../Scoreboard"
+import Country from "../Country"
+import { EdgeCases } from "../../utils/EdgeCases.js"
+import "./index.css"
 
 class CountryGuess extends Component {
 
@@ -60,7 +61,7 @@ class CountryGuess extends Component {
 
     checkEdgeCases = () => {
         let edgeCaseGuess = this.capitalizedCountry()
-        if (EdgeCases[edgeCaseGuess] 
+        if (EdgeCases[edgeCaseGuess]
             && !this.state.countriesGuessed.includes(EdgeCases[edgeCaseGuess])) {
             this.props.correctGuess(EdgeCases[edgeCaseGuess])
             this.state.countriesGuessed.push(EdgeCases[edgeCaseGuess])
@@ -137,11 +138,12 @@ class CountryGuess extends Component {
                     <input
                         type="text"
                         name="currentGuess"
+                        className="currentGuess"
                         placeholder="Start typing country names here"
                         value={this.state.currentGuess}
                         onChange={this.handleInputChange}
                         disabled={!this.props.timerRunning}
-                        ref={(input) => { this.countryInput = input; }} 
+                        ref={(input) => { this.countryInput = input; }}
                     />
                 </form>
                 <Scoreboard

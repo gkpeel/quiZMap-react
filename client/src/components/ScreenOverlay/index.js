@@ -32,11 +32,8 @@ class ScreenOverlay extends Component {
                     <div className="loadCopyContainer">
                         <img
                             src={logo}
-                            style={{
-                                maxHeight: "300px"
-                            }}
                             alt="quizmap Logo"
-                            className="mb-3"
+                            className="mb-3 quizmap-logo"
                         />
                         <h1 className="display-3 text-center mb-2 font-concert">
                             {this.props.score === this.props.maxScore ? 'You won!' : 'Game Over!'}
@@ -70,13 +67,10 @@ class ScreenOverlay extends Component {
                     <div className="loadCopyContainer">
                         <img
                             src={logo}
-                            style={{
-                                maxHeight: "300px"
-                            }}
                             alt="quizmap Logo"
-                            className="mb-3"
+                            className="mb-3 quizmap-logo"
                         />
-                        <h1 className="display-3 text-center mb-2 font-concert">Welcome to quizzmap!</h1>
+                        <h1 className="display-3 text-center mb-2 font-concert">Welcome to quiZMap!</h1>
                         <h1 style={{ fontWeight: 100, fontStyle: "italic" }} className="display-4 mb-5 text-center">
                             Show where you know
                     </h1>
@@ -97,11 +91,8 @@ class ScreenOverlay extends Component {
                     <div className="loadCopyContainer">
                         <img
                             src={logo}
-                            style={{
-                                maxHeight: "300px"
-                            }}
                             alt="quizmap Logo"
-                            className="mb-3"
+                            className="mb-3 quizmap-logo"
                         />
                         <h1 style={{ fontWeight: 100, fontStyle: "italic" }} className="display-4 mb-5 text-center">
                             Game is Paused
