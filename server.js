@@ -19,15 +19,17 @@ mongoose.connect((process.env.MONGODB_URI || "mongodb://localhost/worldcountries
 //collect the list of countries to guess and place them in alphabetical order
 app.get("/api/continent/world", (req, res) => {
   db.Country
-    .find({}, { "properties.ADMIN": 1 }, { sort: { 'properties.ADMIN': 1 } })
+    .find({ "properties.type": { $in: ["Sovereign country", "Country"] } }, { "properties.admin": 1 }, { sort: { 'properties.admin': 1 } })
     .then(dbModel => { res.json(dbModel) })
     .catch(err => res.status(422).json(err));
 })
 
 app.get("/api/continent/:continent", (req, res) => {
-  console.log(req.params.continent);
+  var continent = req.params.continent.split('-').map((word) => {
+    return word.charAt(0).toUpperCase() + word.slice(1)
+  }).join(' ')
   db.Country
-    .find({ "properties.continent": req.params.continent }, { "properties.ADMIN": 1 }, { sort: { 'properties.ADMIN': 1 } })
+    .find({ "properties.type": { $in: ["Sovereign country", "Country"] }, "properties.continent": continent }, { "properties.admin": 1 }, { sort: { 'properties.admin': 1 } })
     .then(dbModel => { res.json(dbModel) })
     .catch(err => res.status(422).json(err));
 })
@@ -35,13 +37,11 @@ app.get("/api/continent/:continent", (req, res) => {
 // return the correctGuess GeoJSON object
 app.get("/api/:country", (req, res) => {
   db.Country
-    .findOne({ "properties.ADMIN": req.params.country })
+    .findOne({ "properties.admin": req.params.country })
     .then(dbModel => { res.json(dbModel) })
     .catch(err => console.log(err))
 })
 
-// Send every request to the React app
-// Define any API routes before this runs
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });

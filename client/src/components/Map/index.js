@@ -42,7 +42,8 @@ class Map extends Component {
 
     setMouseListener = () => {
         this.state.quizmap.data.addListener('mouseover', (e) => {
-            this.props.setHoverInfo(e.feature.l.ADMIN)
+            console.log(e);
+            this.props.setHoverInfo(e.feature.l.admin)
         })
         this.state.quizmap.data.addListener('mouseout', (e) => {
             this.props.setHoverInfo("???????????????")
@@ -125,7 +126,7 @@ class Map extends Component {
         }
 
         if (prevProps.correctGuess !== this.props.correctGuess) {
-            API.loadCountry(this.state.quizmap, this.props.correctGuess, this.props.secondsRemaining);
+            API.loadCountry(this.state.quizmap, this.props.correctGuess);
         }
 
         if (prevProps.gameOver && !this.props.gameOver) {

@@ -6,7 +6,10 @@ export default {
         if (countryName) {
             axios.get("/api/" + countryName)
                 .then(response => {
-                    map.data.addGeoJson(response.data, { idPropertyName: response.data.properties.ADMIN })
+                    map.data.addGeoJson(response.data, { idPropertyName: response.data.properties.admin })
+                })
+                .catch(err => {
+                    console.log(countryName, err)
                 })
         }
     }

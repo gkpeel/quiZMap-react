@@ -50,9 +50,8 @@ class Game extends Component {
   }
 
   getUnanswered = (unAnsweredArr) => {
+    console.log(unAnsweredArr);
     this.setState({ unAnsweredArr: unAnsweredArr })
-    // console.log(this.state.unAnsweredArr);
-    // console.log(unAnsweredArr);
   }
 
   setHoverInfo = (hoverInfo) => {
