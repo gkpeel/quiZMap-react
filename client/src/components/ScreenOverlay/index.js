@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import logo from "../../img/quizmap-logo.svg";
+// import logo from "../../img/quizmap-logo.svg";
+import logo2 from "../../img/logo-redesign.svg"
 import "./index.css";
 
 class ScreenOverlay extends Component {
@@ -31,7 +32,7 @@ class ScreenOverlay extends Component {
                 <div className={this.state.overlayActive ? 'loadScreenStyle active' : 'loadScreenStyle'}>
                     <div className="loadCopyContainer">
                         <img
-                            src={logo}
+                            src={logo2}
                             alt="quizmap Logo"
                             className="mb-3 quizmap-logo"
                         />
@@ -43,14 +44,14 @@ class ScreenOverlay extends Component {
                         </h1>
                         <div className="buttons-container" style={{ display: "flex" }}>
                             <button
-                                style={{ backgroundColor: "#599DE2", borderColor: "#599DE2" }}
+                                style={{ backgroundColor: "#376191", borderColor: "#376191" }}
                                 className="mr-2 d-block w-50 btn btn-lg btn-primary"
                                 onClick={this.props.startGame}
                             >
                                 Play again?
                             </button>
                             <button
-                                style={{ backgroundColor: "#599DE2", borderColor: "#599DE2" }}
+                                style={{ backgroundColor: "#90DF3E", borderColor: "#90DF3E" }}
                                 className="ml-2 d-block w-50 btn btn-lg btn-primary"
                                 onClick={() => this.clearOverlay()}
                             >
@@ -66,7 +67,7 @@ class ScreenOverlay extends Component {
                 <div className={this.state.overlayActive ? 'loadScreenStyle active' : 'loadScreenStyle'}>
                     <div className="loadCopyContainer">
                         <img
-                            src={logo}
+                            src={logo2}
                             alt="quizmap Logo"
                             className="mb-3 quizmap-logo"
                         />
@@ -75,7 +76,7 @@ class ScreenOverlay extends Component {
                             Show where you know
                     </h1>
                         <button
-                            style={{ backgroundColor: "#599DE2", borderColor: "#599DE2" }}
+                            style={{ backgroundColor: "#376191", borderColor: "#376191" }}
                             className="mx-auto d-block w-50 btn btn-lg btn-primary"
                             onClick={this.props.startGame}
                         >
@@ -90,7 +91,7 @@ class ScreenOverlay extends Component {
                 <div className={this.state.overlayActive ? 'loadScreenStyle active' : 'loadScreenStyle'}>
                     <div className="loadCopyContainer">
                         <img
-                            src={logo}
+                            src={logo2}
                             alt="quizmap Logo"
                             className="mb-3 quizmap-logo"
                         />
@@ -98,7 +99,7 @@ class ScreenOverlay extends Component {
                             Game is Paused
                     </h1>
                         <button
-                            style={{ backgroundColor: "#599DE2", borderColor: "#599DE2" }}
+                            style={{ backgroundColor: "#376191", borderColor: "#376191" }}
                             className="mx-auto d-block w-50 btn btn-lg btn-primary"
                             onClick={this.props.toggleTimer}
                         >
