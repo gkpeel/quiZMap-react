@@ -124,11 +124,11 @@ class Timer extends Component {
 
     render() {
         return (
-            <div>
+            <div className="timer-container">
                 <h1 className="display-3 text-center" style={{ color: "#fff" }}>
                     {this.state.minutes}:{this.state.seconds}
                 </h1>
-                <div className="d-flex">
+                <div className="buttons-container">
                     <button
                         onClick={this.props.gameStarted ? this.props.toggleTimer : this.props.startGame}
                         style={style.pause}

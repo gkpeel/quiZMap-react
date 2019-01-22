@@ -1,3 +1,41 @@
+.form-container {
+    display: flex;
+    margin-bottom: 0.25rem;
+}
+
+.form-container form {
+    flex: 1 0 auto;
+}
+
 .currentGuess:focus {
     outline-color: #79C9E9
+}
+
+.guess-input {
+    margin-bottom: 0.5rem;
+}
+
+.score-container {
+    margin-left: 12px;
+}
+
+.score-header {
+    display: none;
+}
+
+/* MEDIA QUERIES - following Bootstrap max-width breakpoints */
+@media screen and (min-width: 992px) {
+    .form-container {
+        flex-direction: column;
+        margin-bottom: 0.5rem;
+    }
+    .guess-input {
+        margin-bottom: 2rem;
+    }
+    .score-container {
+        margin-left: 0;
+    }
+    .score-header {
+        display: block;
+    }
 }

@@ -6,4 +6,19 @@
 
 .App {
     display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+/* MEDIA QUERIES - following Bootstrap max-width breakpoints
+
+Width-based media queries
+-------------------------
+media query for phones in portrait mode */
+@media screen and (min-width: 576px) {
+    .App {
+        flex-direction: row;
+    }
 }

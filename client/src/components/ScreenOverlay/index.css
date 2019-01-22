@@ -5,7 +5,7 @@
     align-content: "center";
     flex-direction: "column";
     background-color: rgba(200, 200, 200, 0.75);
-    height: 100vh;
+    height: calc(100vh - 300px);
     width: 100%;
     z-index: 10;
     transition: display 300ms ease-in-out
@@ -17,7 +17,7 @@
 
 .loadCopyContainer {
     color: #fff;
-    width: 75%;
+    width: 90%;
     margin: auto;
     background-color: #aaa;
     border: 4px solid #fff;
@@ -26,17 +26,73 @@
 }
 
 .quizmap-logo {
-    max-height: 300px;
+    max-height: 180px;
 }
 
-@media screen and ( max-height: 670px ) {
-    .quizmap-logo {
-        max-height: 180px;
+.maintitle {
+    font-size: 2rem;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+
+/* MEDIA QUERIES - following Bootstrap max-width breakpoints
+
+Width-based media queries
+-------------------------
+media query for phones in portrait mode */
+@media screen and (min-width: 576px) {
+    
+}
+
+/* media query for phones in landscape mode */
+@media screen and (min-width: 768px) and (min-height: 568px) {
+    .loadScreenStyle {
+        height: calc(100% - 200px);
     }
-    .display-3 {
+}
+
+/* media query for tablets */
+@media screen and (min-width: 992px) {
+    .loadScreenStyle {
+        height: 100vh;
+    }
+
+    .loadCopyContainer {
+        width: 85%;
+        margin: auto;
+        border: 2px solid #fff;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+    }
+
+    .maintitle {
         font-size: 3.5rem;
     }
-    .display-4 {
+
+    .subtitle {
         font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
+}
+
+/* media query for small laptops */
+@media screen and (min-width: 1200px) {
+    .loadCopyContainer {
+        width: 75%;
+    }
+
+    .quizmap-logo {
+        max-height: 300px
+    }
+    .maintitle {
+        font-size: 4.5rem;
+    }
+    .subtitle {
+        font-size: 3.5rem;
+        margin-bottom: 3rem;
     }
 }

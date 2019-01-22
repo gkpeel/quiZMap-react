@@ -146,10 +146,6 @@ class Map extends Component {
 
             <GoogleMap
                 id="quizMap-gameDisplay"
-                mapContainerStyle={{
-                    height: "100vh",
-                    width: "100%"
-                }}
                 zoom={4}
                 center={this.state.center}
                 onLoad={(map) => {

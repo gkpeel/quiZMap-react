@@ -2,14 +2,15 @@
     position: absolute;
     background-color: #4D8848;
     color: #fff;
-    bottom: 36px;
-    right: -175px;
+    top: -439px;
+    left: 0;
+    /* right: -175px; */
     border-top-right-radius: 8px;
-    transition: right 300ms ease-in-out;
+    transition: top 300ms ease-in-out;
 }
 
 .menu-container.inactive {
-    right: 0;
+    top: 0;
 }
 
 .menu {
@@ -30,11 +31,10 @@
 
 .menu-button {
     position: absolute;
-    bottom: 25px;
-    right: -73px;
+    top: -48px;
+    left: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    transform: rotate(90deg);
     background-color: #4D8848;
     border-color:  #4D8848;
     color: #fff;
@@ -45,4 +45,50 @@
 .menu-button:hover {
     color: #f0f0f0;
     transform: scale(1.1),rotate(90deg)
+}
+
+
+
+/* MEDIA QUERIES - following Bootstrap max-width breakpoints */
+@media screen and (min-width: 992px) {
+    .menu-container {
+        top: unset;
+        left: unset;
+        bottom: 36px;
+        right: -175px;
+        border-top-right-radius: 8px;
+        transition: right 300ms ease-in-out;
+    }
+    
+    .menu-container.inactive {
+        top: unset;
+        right: 0;
+    }
+    
+    .menu {
+        position: relative;
+        min-width: 175px;
+        max-width: 175px;
+        transition: margin 300ms ease-in-out;
+    }
+    
+    .main-nav .nav-item {
+        margin-bottom: 1rem;
+    }
+    
+    .menu.inactive {
+        margin-left: -175px;
+    }
+    
+    .menu-button {
+        position: absolute;
+        top: unset;
+        left: unset;
+        bottom: 25px;
+        right: -73px;
+        transform: rotate(90deg);
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        padding: .5rem 1.5rem;
+    }
 }

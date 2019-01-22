@@ -6,12 +6,10 @@ import "./App.css"
 function App() {
   return (
     <Router>
-      <div>
-        <Switch>
-          <Route exact path="/" component={Game} />
-          <Route exact path="/:quizType" component={Game} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/" component={Game} />
+        <Route exact path="/:quizType" component={Game} />
+      </Switch>
     </Router>
   );
 }

@@ -134,22 +134,24 @@ class CountryGuess extends Component {
     render() {
         return (
             <div style={{ display: "flex", flexDirection: "column" }}>
-                <form onSubmit={this.submitHandler} className="form guess-input" style={{ marginBottom: "2rem" }}>
-                    <input
-                        type="text"
-                        name="currentGuess"
-                        className="currentGuess"
-                        placeholder="Start typing country names here"
-                        value={this.state.currentGuess}
-                        onChange={this.handleInputChange}
-                        disabled={!this.props.timerRunning}
-                        ref={(input) => { this.countryInput = input; }}
+                <div className="form-container">
+                    <form onSubmit={this.submitHandler} className="form guess-input">
+                        <input
+                            type="text"
+                            name="currentGuess"
+                            className="currentGuess"
+                            placeholder="Start typing country names here"
+                            value={this.state.currentGuess}
+                            onChange={this.handleInputChange}
+                            disabled={!this.props.timerRunning}
+                            ref={(input) => { this.countryInput = input; }}
+                        />
+                    </form>
+                    <Scoreboard
+                        countriesGuessed={this.state.countriesGuessed.length}
+                        countriesToGuess={this.state.countriesToGuess.length}
                     />
-                </form>
-                <Scoreboard
-                    countriesGuessed={this.state.countriesGuessed.length}
-                    countriesToGuess={this.state.countriesToGuess.length}
-                />
+                </div>
                 <div className="all-countries" style={{ overflow: "scroll" }}>
                     {this.state.countriesToGuess.map((country, i) =>
                         <Country

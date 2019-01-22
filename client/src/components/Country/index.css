@@ -16,3 +16,14 @@
 .country-display.game-over {
     color: #e97777;
 }
+
+
+
+/* MEDIA QUERIES - following Bootstrap max-width breakpoints
+
+Width-based media queries
+-------------------------
+media query for phones in portrait mode */
+@media screen and (min-width: 576px) {
+
+}

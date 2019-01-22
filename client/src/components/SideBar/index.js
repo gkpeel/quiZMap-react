@@ -10,7 +10,7 @@ class SideBar extends Component {
         return (
             <div className="guess-display">
                 <div className="guess-container">
-                    <h1 className="mb-4 font-concert" style={{ color: "#fff" }}>Guess a Country</h1>
+                    <h1>Guess a Country</h1>
                     <CountryGuess
                         quizType={this.props.quizType}
                         gameStarted={this.props.gameStarted}

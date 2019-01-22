@@ -4,6 +4,7 @@ import SideBar from "../SideBar"
 import ScreenOverlay from "../ScreenOverlay"
 import Nicebox from "../Nicebox"
 import Map from "../Map"
+import './index.css'
 
 class Game extends Component {
 
@@ -93,13 +94,7 @@ class Game extends Component {
             </div>
           }
         >
-          <div
-            style={{
-              position: "relative",
-              height: "100vh",
-              width: "100%"
-            }}
-          >
+          <div className="game-display__container">
             <ScreenOverlay
               gameStarted={this.state.gameStarted}
               gameOver={this.state.gameOver}

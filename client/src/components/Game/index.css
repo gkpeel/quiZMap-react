@@ -1,9 +1,22 @@
-@import url('https://fonts.googleapis.com/css?family=Concert+One');
-
-.font-concert {
-    font-family: 'Concert One', sans-serif;
+.game-display__container {
+    position: relative;
+    height: calc(100vh - 300px);
+    width: 100%;
 }
 
-.App {
-    display: flex;
+#quizMap-gameDisplay {
+    height: calc(100vh - 300px);
+    width: 100%;
+}
+
+/* MEDIA QUERIES - following Bootstrap max-width breakpoints
+media query for phones in portrait mode */
+@media screen and (min-width: 576px) {
+    .game-display__container {
+        height: 100vh
+    }
+
+    #quizMap-gameDisplay {
+        height: 100vh;
+    }
 }
