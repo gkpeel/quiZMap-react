@@ -17,7 +17,7 @@
 Width-based media queries
 -------------------------
 media query for phones in portrait mode */
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 992px) {
     .App {
         flex-direction: row;
     }

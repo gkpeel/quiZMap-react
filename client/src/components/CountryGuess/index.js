@@ -62,7 +62,8 @@ class CountryGuess extends Component {
     checkEdgeCases = () => {
         let edgeCaseGuess = this.capitalizedCountry()
         if (EdgeCases[edgeCaseGuess]
-            && !this.state.countriesGuessed.includes(EdgeCases[edgeCaseGuess])) {
+            && !this.state.countriesGuessed.includes(EdgeCases[edgeCaseGuess])
+            && this.state.countriesToGuess.includes(EdgeCases[edgeCaseGuess])) {
             this.props.correctGuess(EdgeCases[edgeCaseGuess])
             this.state.countriesGuessed.push(EdgeCases[edgeCaseGuess])
             return true

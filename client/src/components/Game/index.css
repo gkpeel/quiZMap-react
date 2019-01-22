@@ -11,7 +11,7 @@
 
 /* MEDIA QUERIES - following Bootstrap max-width breakpoints
 media query for phones in portrait mode */
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 992px) {
     .game-display__container {
         height: 100vh
     }

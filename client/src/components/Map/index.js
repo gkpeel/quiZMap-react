@@ -17,10 +17,7 @@ const googleMapOptions = {
 class Map extends Component {
 
     state = {
-        center: {
-            lat: 39.9526,
-            lng: -75.1652
-        },
+        center: null,
         quizmap: null,
         lastValidCenter: null,
     }
@@ -115,6 +112,32 @@ class Map extends Component {
 
     clearMap = (map) => {
         map.data.forEach(item => map.data.remove(item))
+    }
+
+    componentDidMount() {
+        console.log(this.props.quizType)
+        switch (this.props.quizType) {
+            case ('north-america'):
+                this.setState({ center: { lat: 48.3552767, lng: -99.9995795 } })
+                break
+            case ('south-america'):
+                this.setState({ center: { lat: -15.6014, lng: -56.0979 } })
+                break
+            case ('europe'):
+                this.setState({ center: { lat: 54.5260, lng: 15.2551 } })
+                break
+            case ('africa'):
+                this.setState({ center: { lat: -8.7832, lng: 34.5085 } })
+                break
+            case ('asia'):
+                this.setState({ center: { lat: 34.0479, lng: 100.6197 } })
+                break
+            case ('oceania'):
+                this.setState({ center: { lat: -22.7359, lng: 140.0188 } })
+                break
+            default:
+                this.setState({ center: { lat: 39.9526, lng: -75.1652 } })
+        }
     }
 
     componentDidUpdate(prevProps) {

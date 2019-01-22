@@ -6,11 +6,33 @@ import "./index.css";
 
 class SideBar extends Component {
 
+    renderTitle = () => {
+        if (this.props.quizType === "europe") {
+            return 'in Europe'
+        }
+        if (this.props.quizType === "africa") {
+            return 'in Africa'
+        }
+        if (this.props.quizType === "asia") {
+            return 'in Asia'
+        }
+        if (this.props.quizType === "oceania") {
+            return 'in Oceania'
+        }
+        if (this.props.quizType === "north-america") {
+            return 'in North America'
+        }
+        if (this.props.quizType === "south-america") {
+            return 'in South America'
+        }
+        return 'of the World'
+    }
+
     render() {
         return (
             <div className="guess-display">
                 <div className="guess-container">
-                    <h1>Guess a Country</h1>
+                    <h1>Name the Countries {this.renderTitle()}</h1>
                     <CountryGuess
                         quizType={this.props.quizType}
                         gameStarted={this.props.gameStarted}

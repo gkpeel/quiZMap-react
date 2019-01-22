@@ -26,7 +26,6 @@ export const EdgeCases = {
     "St. Vincent and the Grenadines": "Saint Vincent and the Grenadines",
     "Tanzania": "United Republic of Tanzania",
     "Timor-Leste": "East Timor",
-    "Turks and Caicos": "Turks and Caicos Islands",
     Serbia: "Republic of Serbia",
     Uae: "United Arab Emirates",
     UAE: "United Arab Emirates",

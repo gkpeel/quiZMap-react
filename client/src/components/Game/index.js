@@ -109,6 +109,7 @@ class Game extends Component {
               hoverInfo={this.state.hoverInfo}
             />
             <Map
+              quizType={this.props.match.params.quizType}
               gameStarted={this.state.gameStarted}
               gameOver={this.state.gameOver}
               correctGuess={this.state.correctGuess}
