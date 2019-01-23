@@ -7,6 +7,7 @@ class Menu extends Component {
         active: false
     }
 
+    // Toggle the menu's state to reveal/hide the menu
     toggleActivity = () => {
         let currentState = this.state.active;
         this.setState({ active: !currentState })

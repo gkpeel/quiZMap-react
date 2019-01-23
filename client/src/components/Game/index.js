@@ -17,6 +17,7 @@ class Game extends Component {
     hoverInfo: "???????????????"
   }
 
+  // function to reset states to start game
   startGame = () => {
     this.setState({
       gameStarted: true,
@@ -27,38 +28,45 @@ class Game extends Component {
     })
   }
 
+  // function to end game: stops timer, loads countries in unAnsweredArr, makes overlay active
   endGame = () => {
     this.setState({ gameOver: true })
     this.setState({ gameStarted: false })
     this.setState({ timerRunning: false })
   }
 
+  // function used to toggle the timerRunning state to pause/resume <Timer/> component
   toggleTimer = () => {
     let timerValue = this.state.timerRunning;
     this.setState({ timerRunning: !timerValue })
   }
 
+  // function to receive a correct answer from <CountryGuess/> and pass it to <Map/>
   correctGuess = (correctGuessInput) => {
     this.setState({ correctGuess: correctGuessInput });
   }
 
+  // Set Max Score based on <CountryGuess/>'s [CountriesToGuess] state
   setMaxScore = (countriesToGuess) => {
     this.setState({ maxScore: countriesToGuess })
   }
 
+  // Set Max Score based on <CountryGuess>'s [CountriesToGuess] state
   setScore = (countriesGuessed) => {
     this.setState({ score: countriesGuessed })
   }
 
+
   getUnanswered = (unAnsweredArr) => {
-    console.log(unAnsweredArr);
     this.setState({ unAnsweredArr: unAnsweredArr })
   }
 
+  // Receives the hoverInfo from <Map/> and passes in to <Nicebox/>
   setHoverInfo = (hoverInfo) => {
     this.setState({ hoverInfo: hoverInfo })
   }
 
+  // Receives secondsRemaining state from <Timer/> and passes it down to the <Map/> (for dynamic color creation)
   setSecondsRemaining = (secondsRemaining) => {
     this.setState({ secondsRemaining: secondsRemaining });
   }

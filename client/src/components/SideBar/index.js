@@ -6,26 +6,24 @@ import "./index.css";
 
 class SideBar extends Component {
 
+    // Customize title based on prop.quizType value
     renderTitle = () => {
-        if (this.props.quizType === "europe") {
-            return 'in Europe'
+        switch (this.props.quizType) {
+            case ("europe"):
+                return 'in Europe'
+            case ("africa"):
+                return 'in Africa'
+            case ("asia"):
+                return 'in Asia'
+            case ("oceania"):
+                return 'in Oceania'
+            case ("north-america"):
+                return 'in North America'
+            case ("south-america"):
+                return 'in South America'
+            default:
+                return 'of the World'
         }
-        if (this.props.quizType === "africa") {
-            return 'in Africa'
-        }
-        if (this.props.quizType === "asia") {
-            return 'in Asia'
-        }
-        if (this.props.quizType === "oceania") {
-            return 'in Oceania'
-        }
-        if (this.props.quizType === "north-america") {
-            return 'in North America'
-        }
-        if (this.props.quizType === "south-america") {
-            return 'in South America'
-        }
-        return 'of the World'
     }
 
     render() {

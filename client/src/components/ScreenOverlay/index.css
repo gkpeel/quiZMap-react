@@ -38,6 +38,14 @@
     margin-bottom: 0.75rem;
 }
 
+a.attribution-link {
+    display: block;
+    margin: 4px auto 0;
+    text-align: center;
+    color: #ddd;
+    font-size: 10xp;
+}
+
 
 /* MEDIA QUERIES - following Bootstrap max-width breakpoints
 

@@ -3,6 +3,7 @@ import './index.css'
 
 const Country = props => {
 
+    // Return html depending on the country's props of the game being over and/or the country being guessed
     const countryDisplay = () => {
         if (props.gameOver && !props.guessed) {
             return (

@@ -8,6 +8,8 @@ class ScreenOverlay extends Component {
         overlayActive: true
     }
 
+    // toggle overlayActive props based on <Game/> state, 
+    // overlayActive state determines .active class to change display: none to display: block
     toggleOverlay = () => {
         if ((!this.props.timerRunning || this.props.gameOver)) {
             this.setState({ overlayActive: true })
@@ -16,16 +18,21 @@ class ScreenOverlay extends Component {
         }
     }
 
+    // Review button's onClick event to clear .active class
     clearOverlay = () => {
         this.setState({ overlayActive: false })
     }
 
+    // call toggleOverlay if game is paused 
     componentDidUpdate = (prevProps) => {
         if (prevProps.timerRunning && !this.props.timerRunning) {
             this.toggleOverlay();
         }
     }
 
+    // Depending on the gameStarted, timerRunning, and gameOver props:
+    // Render different overlay, Start Game/Welcome overlay, Game Paused overlay, Game Over overlay
+    // Button click events either, change <Game/>'s gameStarted state to true or toggle Overlay state/.active class
     render() {
         if (this.props.gameOver) {
             return (
@@ -51,13 +58,14 @@ class ScreenOverlay extends Component {
                                 Play again?
                             </button>
                             <button
-                                style={{ backgroundColor: "#90DF3E", borderColor: "#90DF3E" }}
+                                style={{ backgroundColor: "#83db24", borderColor: "#83db24" }}
                                 className="ml-2 d-block w-50 btn btn-lg btn-primary"
                                 onClick={() => this.clearOverlay()}
                             >
                                 Review
                             </button>
                         </div>
+                        <a className="attribution-link" target="blank" href="https://www.freepik.com/free-photos-vectors/icon">Icon vector created by freepik - www.freepik.com</a>
                     </div>
                 </div>
             )
@@ -81,7 +89,8 @@ class ScreenOverlay extends Component {
                             onClick={this.props.startGame}
                         >
                             Start Game
-                    </button>
+                        </button>
+                        <a className="attribution-link" target="blank" href="https://www.freepik.com/free-photos-vectors/icon">Icon vector created by freepik - www.freepik.com</a>
                     </div>
                 </div>
             )
@@ -104,7 +113,8 @@ class ScreenOverlay extends Component {
                             onClick={this.props.toggleTimer}
                         >
                             Resume Game
-                    </button>
+                        </button>
+                        <a className="attribution-link" target="blank" href="https://www.freepik.com/free-photos-vectors/icon">Icon vector created by freepik - www.freepik.com</a>
                     </div>
                 </div>
             )

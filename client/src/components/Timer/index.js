@@ -24,30 +24,27 @@ class Timer extends Component {
     }
     intervalHandle;
 
+    // If component will update, set the allotted time for the quiz
     componentWillMount() {
-        if (this.props.quizType === "europe" || this.props.quizType === "oceania") {
-            this.setState({ secondsRemaining: 480 })
-        } else if (this.props.quizType === "africa" || this.props.quizType === "asia" || this.props.quizType === "north-america") {
-            this.setState({ secondsRemaining: 600 })
-        } else if (this.props.quizType === "south-america") {
-            this.setState({ secondsRemaining: 300 })
-        }
+        this.setQuizTime()
     }
 
+    // Set the component's minutes state
     componentDidMount() {
-        this.setMins();
+        this.setMins()
     }
 
-    componentDidUpdate(prevProps, prevState) {
-
+    // Depending on the value of the <Game/>'s props passed down toggle Timer
+    componentDidUpdate(prevProps) {
+        // If the state of <Game/>'s timerRunning changes from false to true, start the timer 
         if (!prevProps.timerRunning && this.props.timerRunning) {
-            // this.gameStart()
             this.startCountDown()
         }
+        // If the state of <Game/>'s timerRunning changes from true to false, pause the timer         
         if (prevProps.timerRunning && !this.props.timerRunning) {
-            // this.gamePause()
             this.pauseCountDown()
         }
+        // If the state of <Game/>'s gameOver changes from false to true, set the timer's value to 00:00
         if (!prevProps.gameOver && this.props.gameOver) {
             this.setState({
                 seconds: "00",
@@ -55,8 +52,9 @@ class Timer extends Component {
                 secondsRemaining: 0
             })
         }
+        // If the state of <Game/>'s gameOver changes from true to false, set the timer's value to 00:00
         if (prevProps.gameOver && !this.props.gameOver) {
-            this.setState({ secondsRemaining: 899 })
+            this.setQuizTime()
             this.props.startGame()
         }
         if (!prevProps.gameOver && this.state.secondsRemaining === 0) {
@@ -64,14 +62,19 @@ class Timer extends Component {
         }
     }
 
+    // Call tick() once every 1000ms
     startCountDown = () => {
         this.intervalHandle = setInterval(this.tick, 1000);
     }
 
+    // Clear intervalHandle when called
     pauseCountDown = () => {
         clearInterval(this.intervalHandle);
     }
 
+    // Set the state's minutes and seconds, handle issues with single digits
+    // Pass secondsRemaining to <Game/> (to then be passed to Map for dynamic color)
+    // Decrement secondsRemaining state
     tick = () => {
         var min = Math.floor(this.state.secondsRemaining / 60);
         var sec = this.state.secondsRemaining - (min * 60);
@@ -105,11 +108,13 @@ class Timer extends Component {
         this.state.secondsRemaining--
     }
 
+    // Set minute state based on the secondsRemaining state
     setMins = () => {
         var min = Math.floor((this.state.secondsRemaining + 1) / 60);
         this.setState({ minutes: min })
     }
 
+    // Render the value of the button according to the <Game/>'s gameStarted state
     renderStartButton = () => {
         if (this.props.gameStarted) {
             if (this.props.timerRunning) {
@@ -119,6 +124,19 @@ class Timer extends Component {
             }
         } else {
             return 'Start'
+        }
+    }
+
+    // Based on the quizType prop, set the component's secondsRemaining
+    setQuizTime = () => {
+        if (this.props.quizType === "europe" || this.props.quizType === "oceania") {
+            this.setState({ secondsRemaining: 479 })
+        } else if (this.props.quizType === "africa" || this.props.quizType === "asia" || this.props.quizType === "north-america") {
+            this.setState({ secondsRemaining: 599 })
+        } else if (this.props.quizType === "south-america") {
+            this.setState({ secondsRemaining: 299 })
+        } else {
+            this.setState({ secondsRemaining: 899 })
         }
     }
 

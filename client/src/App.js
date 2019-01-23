@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Game from "./components/Game"
 import "./App.css"
 
+// The URL determine which countries to load, where the map's center should be, how much time the user is allowed
 function App() {
   return (
     <Router>
