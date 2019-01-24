@@ -80,15 +80,17 @@ Width-based media queries
     .loadCopyContainer {
         width: 75%;
     }
-
-    .quizmap-logo {
-        max-height: 300px
-    }
     .maintitle {
         font-size: 4.5rem;
     }
     .subtitle {
         font-size: 3.5rem;
         margin-bottom: 3rem;
+    }
+}
+
+@media screen and (min-width: 1200px) and (min-height: 800px) {
+    .quizmap-logo {
+        max-height: 300px
     }
 }

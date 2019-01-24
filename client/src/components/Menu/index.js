@@ -21,25 +21,25 @@ class Menu extends Component {
                     <h2 className="mb-3">Quizzes</h2>
                     <ul className="nav main-nav flex-column">
                         <li className="nav-item">
-                            <a className="d-block" style={{ color: "#fff" }} href="/">World</a>
+                            <a className={this.props.quizType === null || this.props.quizType === undefined ? "active" : ""} href="/">World</a>
                         </li>
                         <li className="nav-item">
-                            <a className="d-block" style={{ color: "#fff" }} href="/north-america">North America</a>
+                            <a className={this.props.quizType === "north-america" ? "active" : ""} href="/north-america">North America</a>
                         </li>
                         <li className="nav-item">
-                            <a className="d-block" style={{ color: "#fff" }} href="/south-america">South America</a>
+                            <a className={this.props.quizType === "south-america" ? "active" : ""} href="/south-america">South America</a>
                         </li>
                         <li className="nav-item">
-                            <a className="d-block" style={{ color: "#fff" }} href="/europe">Europe</a>
+                            <a className={this.props.quizType === "europe" ? "active" : ""} href="/europe">Europe</a>
                         </li>
                         <li className="nav-item">
-                            <a className="d-block" style={{ color: "#fff" }} href="/africa">Africa</a>
+                            <a className={this.props.quizType === "africa" ? "active" : ""} href="/africa">Africa</a>
                         </li>
                         <li className="nav-item">
-                            <a className="d-block" style={{ color: "#fff" }} href="/asia">Asia</a>
+                            <a className={this.props.quizType === "asia" ? "active" : ""} href="/asia">Asia</a>
                         </li>
                         <li className="nav-item">
-                            <a className="d-block" style={{ color: "#fff" }} href="/oceania">Oceania</a>
+                            <a className={this.props.quizType === "oceania" ? "active" : ""} href="/oceania">Oceania</a>
                         </li>
                     </ul>
                     <hr />

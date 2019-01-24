@@ -53,7 +53,9 @@ class SideBar extends Component {
                         setSecondsRemaining={this.props.setSecondsRemaining}
                     />
                 </div>
-                <Menu />
+                <Menu
+                    quizType={this.props.quizType}
+                />
             </div >
         );
     }

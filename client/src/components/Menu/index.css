@@ -46,6 +46,15 @@
     transform: scale(1.1),rotate(90deg)
 }
 
+.nav-item > a {
+    display: block;
+    color: #fff;
+}
+
+.nav-item > a.active {
+    color: #376191;
+}
+
 
 
 /* MEDIA QUERIES - following Bootstrap max-width breakpoints */
