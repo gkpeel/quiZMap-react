@@ -41,9 +41,10 @@ class Menu extends Component {
                         <li className="nav-item">
                             <a className={this.props.quizType === "oceania" ? "active" : ""} href="/oceania">Oceania</a>
                         </li>
+                        <li className="nav-item">
+                            <a className={this.props.quizType === "about" ? "about active" : "about"} href="/about">About</a>
+                        </li>
                     </ul>
-                    <hr />
-                    <a className="d-block" style={{ color: "#fff" }} href="/about">About</a>
                 </div>
                 <button className="btn btn-lg menu-button" onClick={this.toggleActivity}>Menu</button>
             </div>
