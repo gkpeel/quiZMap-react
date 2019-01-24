@@ -1,29 +1,13 @@
-# Create React Express App
+# quiZMap
 
-## About This Boilerplate
+![quiZMap Logo](./client/src/img/logo-redesign.svg)
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
+**[Click here to see the project live](https://quizmap.herokuapp.com/)**
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+## About quiZMap
 
-## Starting the app locally
+Every now and again I like to challenge myself to name all the countries in the world. It's not a terribly useful skill, but I find knowing geography important; if just for the fact that not enough people possess the knowledge. And while there are a bunch of websites that offer geography based quizzes, a lot of their maps are static. Conversely while there are a few quizzes that leverage Google Map's API, they don't seem to quiz users about basic geography. 
 
-Start by installing front and backend dependencies. While in this directory, run the following command:
+quiZMap brings geographic trivia with the Google Maps display to create an engaging experience that will help individuals learn about the world around them. Starting with naming countries (either by continent or of the whole world), quiZMap aims to provide a number of unique quizzes and resources that will make them entertaining and informative with the help of Google Maps. 
 
-```
-yarn install
-```
-
-This should install node modules within the server and the client folder.
-
-After both installations complete, run the following command in your terminal:
-
-```
-yarn start
-```
-
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
-
-## Deployment (Heroku)
-
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
+This application uses the MERN stack to create a timer based application that displays a GeoJSON polygon corresponding to a country's boundaries after a correct guess is entered.
