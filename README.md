@@ -1,6 +1,8 @@
 # quiZMap
 
-![quiZMap Logo](./client/src/img/logo-redesign.svg)
+<p align="center">
+  <img src="./client/src/img/logo-redesign.svg" width="256" title="quiZMap Logo">
+</p>
 
 **[Click here to see the project live](https://quizmap.herokuapp.com/)**
 
